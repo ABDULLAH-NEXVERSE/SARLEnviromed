@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SARL Enviromed — Equipment, modular solutions and construction in Algeria</title>
+<meta name="description" content="Equipment supply, modular workspaces and construction. A local point of contact to move your projects forward in Algeria.">
+<link rel="icon" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --navy:#012a50;      /* brand navy */
+  --navy-hover:#012b53;
+  --navy-deep:#012c53;
+  --teal:#028698;      /* brand teal */
+  --teal-ink:#026a79;  /* teal for small text (AA on white) */
+  --green:#34841b;     /* brand green */
+  --white:#ffffff;
+  --mist:#eef7f8;      /* tint of teal */
+  --mist-2:#d9edf0;
+  --ink:#2a4560;       /* body text, from navy */
+  --line:rgba(1,42,80,.16);
+  --radius:6px;
+  --lens:110px;        /* the one big corner, echoing the logo circle */
+  --font-display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
+  --font-body:"Figtree",system-ui,sans-serif;
+  --maxw:1200px;
+  --gut:clamp(20px,4vw,40px);
+}
+html:lang(ar){--font-display:"Readex Pro","Figtree",system-ui,sans-serif;--font-body:"Readex Pro","Figtree",system-ui,sans-serif}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:3px}
+section[id]{scroll-margin-top:96px}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.ln{display:block}
+
+h1,h2,h3{font-family:var(--font-display);color:var(--navy);letter-spacing:-.02em}
+html:lang(ar) h1,html:lang(ar) h2,html:lang(ar) h3{letter-spacing:0;line-height:1.25}
+h2{font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.06;font-weight:700}
+.lede{font-size:1.1875rem;max-width:34em}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:999px;border:2px solid var(--navy);font-weight:600;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-hover)}
+.btn-ghost{background:transparent;color:var(--navy)}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-light{background:#fff;color:var(--navy);border-color:#fff}
+.btn-light:hover{background:var(--mist);border-color:var(--mist)}
+.btn-green{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ---------- Header ---------- */
+.utility{background:var(--mist);font-size:.875rem;color:var(--navy)}
+.utility .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:40px;flex-wrap:wrap}
+.utility .tag{display:flex;align-items:center;gap:8px;font-weight:600}
+.utility .tag svg{width:16px;height:16px;flex:none}
+.utility .right{display:flex;align-items:center;gap:20px}
+.utility a{text-decoration:none}
+.utility a:hover{text-decoration:underline}
+.langs{display:flex;gap:2px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:2px}
+.langs button{border:0;background:transparent;padding:2px 11px;border-radius:999px;cursor:pointer;font-size:.8125rem;font-weight:600;color:var(--navy)}
+.langs button[aria-pressed="true"]{background:var(--navy);color:#fff}
+
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1.5px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:78px}
+.brand img{height:54px;width:auto}
+.nav{display:flex;align-items:center;gap:clamp(18px,3vw,38px)}
+.nav a.link{font-weight:600;color:var(--navy);text-decoration:none;padding:6px 0;background:linear-gradient(var(--teal),var(--teal)) 0 100%/0 3px no-repeat;transition:background-size .25s}
+html[dir="rtl"] .nav a.link{background-position:100% 100%}
+.nav a.link:hover{background-size:100% 3px}
+.menu-btn{display:none;width:46px;height:46px;border:2px solid var(--navy);border-radius:50%;background:#fff;cursor:pointer;padding:0}
+.menu-btn span,.menu-btn::before,.menu-btn::after{content:"";display:block;width:18px;height:2px;background:var(--navy);margin:4px auto}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;padding-top:clamp(28px,5vw,64px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:clamp(16px,3vw,48px);align-items:center}
+.hero h1{font-size:clamp(3.1rem,7.4vw,6.1rem);line-height:.98;font-weight:800;letter-spacing:-.035em}
+html:lang(ar) .hero h1{line-height:1.2;font-weight:700}
+.hero h1 .ln:nth-child(1){color:var(--navy)}
+.hero h1 .ln:nth-child(2){color:var(--teal)}
+.hero h1 .ln:nth-child(3){color:var(--green)}
+.hero .lede{margin-top:clamp(20px,3vw,32px)}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .note{margin-top:28px;display:flex;align-items:center;gap:14px;font-weight:600;color:var(--navy);font-size:.975rem;max-width:30em}
+.hero .note i{flex:none;width:44px;height:3px;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:3px}
+
+.visual{position:relative;width:100%;max-width:620px;margin-inline-start:auto;aspect-ratio:620/600}
+.visual>svg{width:100%;height:100%;overflow:visible}
+.spin{transform-box:view-box;transform-origin:300px 300px;animation:spin 140s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vcard{position:absolute;background:#fff;border:2px solid var(--navy);box-shadow:8px 8px 0 var(--mist-2)}
+html[dir="rtl"] .vcard{box-shadow:-8px 8px 0 var(--mist-2)}
+.vcard.a{inset-inline-start:-2%;bottom:7%;max-width:262px;padding:16px 20px 18px;border-radius:4px 34px 4px 34px}
+html[dir="rtl"] .vcard.a{border-radius:34px 4px 34px 4px}
+.vcard.a .k{font-weight:700;font-size:.875rem;color:var(--teal-ink)}
+.vcard.a .t{font-family:var(--font-display);font-weight:700;font-size:1.3rem;line-height:1.15;color:var(--navy);margin-top:4px;letter-spacing:-.015em}
+html:lang(ar) .vcard.a .t{letter-spacing:0;line-height:1.35}
+.vcard.a .c{font-size:.8125rem;margin-top:10px;color:var(--ink);opacity:.85}
+.vcard.b{inset-inline-start:0;top:4%;padding:12px 18px 12px 14px;border-radius:999px;display:flex;align-items:center;gap:12px;max-width:300px}
+.vcard.b .dot{flex:none;width:34px;height:34px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.vcard.b .dot svg{width:18px;height:18px}
+.vcard.b b{display:block;font-size:.9rem;line-height:1.25;color:var(--navy)}
+.vcard.b small{display:block;font-size:.8rem;line-height:1.3;color:var(--ink)}
+
+.wave-div{display:block;width:100%;height:clamp(56px,8vw,112px);margin-top:clamp(8px,2vw,24px)}
+.band{background:var(--navy-deep);color:#fff;margin-top:-1px}
+.band ul{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:10px 26px}
+.band li{display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:clamp(1rem,1.6vw,1.2rem);letter-spacing:.005em}
+.band li svg{width:20px;height:20px;flex:none}
+
+/* ---------- Activities ---------- */
+.activities{padding-block:clamp(64px,9vw,120px) clamp(48px,6vw,80px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px 48px;align-items:end;margin-bottom:clamp(32px,5vw,56px)}
+.sec-head p{font-size:1.125rem;max-width:30em}
+.tabs-layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);align-items:start}
+.tablist{display:flex;flex-direction:column}
+.tab{position:relative;display:grid;grid-template-columns:44px 1fr;column-gap:14px;text-align:start;padding:20px 22px 20px 18px;border:0;border-bottom:1.5px solid var(--line);background:transparent;cursor:pointer;color:var(--navy);transition:background-color .2s,color .2s}
+.tab:first-child{border-top:1.5px solid var(--line)}
+.tab .n{font-family:var(--font-display);font-weight:700;font-size:1.65rem;line-height:1.1;color:var(--teal);align-self:start;transition:color .2s}
+.tab .tt{display:block;font-family:var(--font-display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em}
+html:lang(ar) .tab .tt{letter-spacing:0}
+.tab .ts{display:block;font-size:.95rem;line-height:1.45;margin-top:4px;color:var(--ink)}
+.tab:hover{background:var(--mist)}
+.tab[aria-selected="true"]{background:var(--navy);color:#fff;border-bottom-color:var(--navy)}
+.tab[aria-selected="true"] .n{color:#8fd3dd}
+.tab[aria-selected="true"] .ts{color:#d6e6f1}
+.tab[aria-selected="true"]::after{content:"";position:absolute;inset-inline-end:-13px;top:50%;transform:translateY(-50%);border-block:13px solid transparent;border-inline-start:13px solid var(--navy)}
+html[dir="rtl"] .tab[aria-selected="true"]::after{border-inline-start:0;border-inline-end:13px solid var(--navy)}
+
+.panel{border:2px solid var(--navy);border-radius:var(--radius);border-start-end-radius:var(--lens);overflow:hidden;background:#fff}
+.panel.swap{animation:swap .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes swap{from{opacity:.0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel-art{background:var(--mist);border-bottom:2px solid var(--navy);padding:8px 8px 0}
+.panel-art svg{width:100%;height:auto;max-height:300px}
+.panel-art.photo{padding:0;line-height:0;background:var(--navy)}
+.panel-art.photo img{display:block;width:100%;height:clamp(200px,32vw,320px);object-fit:cover}
+.panel-body{padding:clamp(22px,3vw,36px)}
+.panel-body h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;font-weight:700}
+.panel-body .desc{margin-top:12px;font-size:1.0625rem}
+.checks{margin-top:20px;display:grid;gap:10px}
+.checks li{display:flex;gap:12px;align-items:flex-start;font-weight:500;color:var(--navy)}
+.checks svg{flex:none;width:22px;height:22px;margin-top:2px}
+.panel-body .actions{margin-top:26px}
+.panel-body .fine{margin-top:16px;font-size:.84rem;color:var(--ink);opacity:.85;max-width:40em}
+
+/* ---------- Local sourcing band ---------- */
+.sourcing{padding-block:clamp(24px,4vw,48px) clamp(56px,8vw,104px)}
+.sourcing-box{position:relative;overflow:hidden;border-radius:var(--radius);border-start-start-radius:var(--lens);background:linear-gradient(105deg,var(--navy) 0%,var(--navy-hover) 38%,var(--teal) 100%);color:#fff;padding:clamp(32px,5vw,64px) clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px 48px;align-items:center}
+.sourcing-box .k{font-weight:700;font-size:.95rem;color:#a6e0e8;margin-bottom:10px}
+.sourcing-box h2{color:#fff;font-size:clamp(1.8rem,3.6vw,2.9rem);max-width:17em}
+.sourcing-box p{margin-top:14px;max-width:36em;color:#e4f1f6;font-size:1.0625rem}
+.sourcing-box .deco{position:absolute;inset-inline-end:-90px;top:-120px;width:420px;height:420px;opacity:.16;pointer-events:none}
+.sourcing-box>*{position:relative}
+.sourcing-box .deco{position:absolute}
+
+/* ---------- About ---------- */
+.about{background:var(--mist);padding-block:clamp(64px,9vw,120px)}
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:center}
+.about h2{font-size:clamp(2.4rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.03em;font-weight:800}
+.about .lede{margin-top:24px}
+.kps{margin-top:34px;display:grid;gap:0;border-top:2px solid var(--navy)}
+.kps li{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:18px 0;border-bottom:1.5px solid var(--line);align-items:start}
+.kps .ic{width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--navy);display:grid;place-items:center}
+.kps .ic svg{width:24px;height:24px}
+.kps h3{font-size:1.2rem;font-weight:700;line-height:1.2}
+.kps p{margin-top:2px;font-size:1rem}
+.hub{background:#fff;border:2px solid var(--navy);border-radius:var(--radius);border-start-start-radius:var(--lens);padding:clamp(22px,3vw,34px) clamp(18px,3vw,32px) 12px;box-shadow:10px 10px 0 var(--mist-2)}
+html[dir="rtl"] .hub{box-shadow:-10px 10px 0 var(--mist-2)}
+.hub .k{font-weight:700;color:var(--teal-ink);font-size:.95rem;padding-inline-start:clamp(0px,4vw,56px)}
+.hub h3{font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.15;font-weight:700;margin-top:2px;padding-inline-start:clamp(0px,4vw,56px)}
+.hub svg{width:100%;height:auto;margin-top:6px}
+.hub text{font-family:var(--font-body);font-weight:700;fill:var(--navy);font-size:17px;text-anchor:middle}
+
+/* ---------- Approach ---------- */
+.approach{padding-block:clamp(64px,9vw,120px)}
+.approach .sec-head{margin-bottom:clamp(24px,4vw,40px)}
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.steps .wavebg{position:absolute;inset-inline:0;top:0;width:100%;height:112px;pointer-events:none}
+.step{position:relative;padding:0 clamp(12px,2.4vw,36px) 0;text-align:center}
+.step .node{position:relative;z-index:1;width:112px;height:112px;margin-inline:auto;display:grid;place-items:center}
+.step .node svg{position:absolute;inset:0;width:100%;height:100%}
+.step .node b{position:relative;font-family:var(--font-display);font-size:2.1rem;font-weight:800;color:var(--navy)}
+.step h3{margin-top:22px;font-size:1.65rem;font-weight:700}
+.step p{margin:10px auto 0;max-width:22em;font-size:1.0625rem}
+.step:nth-child(2) .node b{color:var(--teal-ink)}
+.step:nth-child(3) .node b{color:var(--green)}
+
+/* ---------- Contact ---------- */
+.contact{padding-block:clamp(24px,3vw,40px) clamp(72px,10vw,130px)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,88px);align-items:start}
+.contact h2{font-size:clamp(2.4rem,5vw,4rem);line-height:1;font-weight:800;letter-spacing:-.03em}
+.contact .lede{margin-top:22px}
+.cinfo{margin-top:34px;display:grid;gap:18px}
+.cinfo li{display:flex;gap:14px;align-items:flex-start;font-weight:500;color:var(--navy);font-size:1.0625rem}
+.cinfo svg{flex:none;width:26px;height:26px;margin-top:2px}
+.cinfo a{text-decoration:none;border-bottom:2px solid var(--teal);font-weight:600}
+.cinfo a:hover{background:var(--mist)}
+.cinfo .country{font-weight:700;color:var(--teal-ink);display:block;margin-top:2px;letter-spacing:.02em}
+html:lang(ar) .cinfo .country{letter-spacing:0}
+.form{background:var(--mist);border:2px solid var(--navy);border-radius:var(--radius);border-start-end-radius:var(--lens);padding:clamp(24px,4vw,44px)}
+.form h3{font-size:1.6rem;font-weight:700;margin-bottom:22px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fields .full{grid-column:1/-1}
+.field label{display:block;font-weight:600;font-size:.9rem;color:var(--navy);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid rgba(1,42,80,.4);border-radius:var(--radius);background:#fff;color:var(--navy);min-height:48px}
+.field textarea{min-height:140px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
+.form .help{margin-top:16px;font-size:.9rem}
+.form .submit{margin-top:20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.confirm{margin-top:18px;padding:14px 16px;border-inline-start:5px solid var(--green);background:#fff;font-weight:500;color:var(--navy);display:none}
+.confirm.show{display:block;animation:swap .4s ease}
+
+/* ---------- Footer ---------- */
+.site-footer{position:relative;background:var(--navy-deep);color:#fff;margin-top:clamp(20px,4vw,48px)}
+.site-footer .wave-top{position:absolute;inset-inline:0;top:0;width:100%;height:clamp(40px,6vw,84px);transform:translateY(-99%)}
+.foot-main{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:32px 48px;padding-block:clamp(40px,6vw,72px) 36px;align-items:start}
+.foot-brand{display:flex;gap:18px;align-items:center}
+.foot-brand .ico{flex:none;width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden}
+.foot-brand .ico img{width:76px;height:76px}
+.foot-brand b{font-family:var(--font-display);font-size:1.4rem;letter-spacing:-.01em;display:block}
+.foot-brand span{display:block;color:#cfe3ee;line-height:1.45;margin-top:4px}
+.foot-links{display:grid;gap:10px}
+.foot-links a{text-decoration:none;color:#fff;font-weight:500;width:fit-content;border-bottom:2px solid transparent}
+.foot-links a:hover{border-bottom-color:var(--teal)}
+.foot-links .mail{color:#8fd3dd}
+.foot-bar{border-top:1.5px solid rgba(255,255,255,.18)}
+.foot-bar .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;justify-content:space-between;padding-block:18px;font-size:.875rem;color:#cfe3ee}
+.foot-bar a{color:#fff;font-weight:600;text-decoration:none;border-bottom:2px solid var(--teal)}
+
+/* ---------- Page-load sequence (one orchestrated moment) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1 .ln{opacity:0;transform:translateY(22px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero h1 .ln:nth-child(2){animation-delay:.14s}
+  .hero h1 .ln:nth-child(3){animation-delay:.28s}
+  .visual>svg .wave-g{animation:sweep 1.2s .25s cubic-bezier(.2,.7,.2,1) both}
+  .visual>svg .leaf-g{transform-box:fill-box;transform-origin:0% 100%;animation:grow .9s .9s cubic-bezier(.2,.8,.2,1) both}
+}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes sweep{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes grow{from{opacity:0;transform:scale(.4) rotate(-12deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .spin{animation:none}
+  .panel.swap,.confirm.show{animation:none}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .visual{margin-inline:auto;max-width:540px}
+  .sec-head{grid-template-columns:1fr;align-items:start}
+  .tabs-layout{grid-template-columns:1fr}
+  .tablist{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:8px;scroll-snap-type:x proximity;margin-inline:calc(var(--gut)*-1);padding-inline:var(--gut)}
+  .tab{flex:none;grid-template-columns:auto;padding:12px 18px;border:1.5px solid var(--navy);border-radius:999px;scroll-snap-align:start}
+  .tab:first-child{border-top:1.5px solid var(--navy)}
+  .tab .n,.tab .ts{display:none}
+  .tab .tt{font-size:1rem;white-space:nowrap}
+  .tab[aria-selected="true"]::after{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .sourcing-box{grid-template-columns:1fr}
+  .foot-main{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  .nav{position:absolute;inset-inline:0;top:100%;background:#fff;border-bottom:1.5px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gut) 20px;display:none}
+  .nav.open{display:flex}
+  .nav a.link{padding:14px 0;border-bottom:1.5px solid var(--line);background:none}
+  .nav .btn{margin-top:16px}
+  .site-header{position:sticky}
+  .site-header .wrap{position:relative}
+  .steps{grid-template-columns:1fr;gap:36px}
+  .steps .wavebg{display:none}
+  .step{padding-inline:0}
+  .steps::before{content:"";position:absolute;inset-block:56px;inset-inline-start:50%;width:3px;background:linear-gradient(var(--teal),var(--green));transform:translateX(-50%);border-radius:3px}
+  .step .node{background:#fff;border-radius:50%}
+  .vcard.b{top:0}
+  .vcard.a{bottom:2%}
+}
+@media (max-width:560px){
+  .utility .right{width:100%;justify-content:space-between}
+  .utility .tag{display:none}
+  .fields{grid-template-columns:1fr}
+  .band ul{justify-content:flex-start}
+  .foot-main{grid-template-columns:1fr}
+  .brand img{height:46px}
+  .vcard.a{max-width:210px;padding:12px 14px 14px;bottom:0}
+  .vcard.a .t{font-size:1.05rem}
+  .vcard.b{max-width:240px;padding:9px 14px 9px 10px}
+}
+/* ---------- Brand colour sections (proportions follow the logo: navy > teal > green) ---------- */
+.activities{background:var(--teal)}
+.activities .sec-head h2,.activities .sec-head p{color:#fff}
+.activities .tab{color:#fff;border-bottom-color:rgba(1,42,80,.35)}
+.activities .tab:first-child{border-top-color:rgba(1,42,80,.35)}
+.activities .tab .n{color:var(--navy)}
+.activities .tab .ts{color:#fff;font-weight:500}
+.activities .tab:hover{background:rgba(255,255,255,.16)}
+.activities .tab[aria-selected="true"]{background:var(--navy);border-bottom-color:var(--navy)}
+.activities .tab[aria-selected="true"] .n{color:#8fd3dd}
+.sourcing{background:#fff}
+.about{background:var(--navy-hover)}
+.about h2,.about .kps h3{color:#fff}
+.about .lede,.about .kps p{color:#dbe9f2}
+.about .kps{border-top-color:var(--teal)}
+.about .kps li{border-bottom-color:rgba(255,255,255,.2)}
+.about .kps .ic{border-color:var(--teal)}
+.about .hub{box-shadow:10px 10px 0 var(--teal)}
+html[dir="rtl"] .about .hub{box-shadow:-10px 10px 0 var(--teal)}
+@media (max-width:980px){
+  .activities .tab{border-color:#fff}
+  .activities .tab:first-child{border-top-color:#fff}
+  .activities .tab[aria-selected="true"]{border-color:var(--navy)}
+}
+</style>
+</head>
+<body>
+
+<!-- Utility bar -->
+<div class="utility">
+  <div class="wrap">
+    <span class="tag">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C11 4 5 9 5 16c0 1.2.2 2.2.5 3 .8-5 4.500-8.500 9.500-10.500-4 3-6.500 6.500-7 11C16 19 20 13 20 4Z" fill="#34841b"/></svg>
+      <span data-i18n="tagline">Your local partner in Algeria</span>
+    </span>
+    <div class="right">
+      <a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false" lang="ar">العربية</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="SARL Enviromed"><img src="assets/logo-full.png" alt="SARL Enviromed" width="190" height="60"></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-i18n-aria="menu" aria-label="Menu"><span></span></button>
+    <nav class="nav" id="nav">
+      <a class="link" href="#activities" data-i18n="nav_activities">Our activities</a>
+      <a class="link" href="#about" data-i18n="nav_about">About us</a>
+      <a class="link" href="#approach" data-i18n="nav_approach">Our approach</a>
+      <a class="btn btn-primary" href="#contact" data-i18n="cta_quote">Request a quotation</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 data-i18n="h1" data-lines>
+        <span class="ln">Equipment.</span><span class="ln">Solutions.</span><span class="ln">Your projects.</span>
+      </h1>
+      <p class="lede" data-i18n="hero_p">Equipment supply, modular workspaces and construction. A local point of contact to move your projects forward in Algeria.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact" data-i18n="hero_b1">Let’s discuss your project</a>
+        <a class="btn btn-ghost" href="#activities" data-i18n="hero_b2">Explore our activities</a>
+      </div>
+      <p class="note"><i aria-hidden="true"></i><span data-i18n="hero_note">From the initial requirement to delivery coordination.</span></p>
+    </div>
+
+    <div class="visual">
+      <svg viewBox="0 0 620 600" role="img" aria-label="Illustration: modular container workspaces inside a cog ring, with a wave and leaf">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9edf0"/></linearGradient>
+          <clipPath id="lens"><circle cx="300" cy="300" r="214"/></clipPath>
+          <clipPath id="waveClip"><circle cx="300" cy="300" r="226"/><polygon points="420,150 720,150 720,560 420,560"/></clipPath>
+          <mask id="ringOpen"><rect x="-100" y="-100" width="900" height="800" fill="#fff"/><polygon points="300,300 615,54 700,420" fill="#000"/></mask>
+          <pattern id="corr" width="9" height="10" patternUnits="userSpaceOnUse"><rect width="9" height="10" fill="none"/><rect x="0" width="2.500" height="10" fill="#000" opacity=".16"/></pattern>
+        </defs>
+
+        <!-- cog ring (rotates slowly) with the opening from the logo -->
+        <g mask="url(#ringOpen)"><g class="spin"><path data-gear="300,300,298,258,228,8" fill="#012a50" fill-rule="evenodd"/></g></g>
+
+        <!-- lens -->
+        <circle cx="300" cy="300" r="214" fill="url(#sky)"/>
+        <g clip-path="url(#lens)">
+          <!-- hills -->
+          <path d="M60 400 C150 350 230 380 320 360 C400 342 470 350 560 380 V560 H60Z" fill="#fff"/>
+          <!-- ground -->
+          <rect x="60" y="430" width="500" height="120" fill="#cfe6ea"/>
+        </g>
+
+        <!-- wave from the logo, sweeping out through the opening -->
+        <g clip-path="url(#waveClip)"><g class="wave-g">
+          <path d="M123.6 238.1C123.0 238.8 123.8 239.9 123.6 240.6C123.3 241.3 122.4 241.2 122.1 242.4C121.9 243.6 121.6 246.3 122.1 247.8C122.6 249.2 124.5 249.8 125.0 251.0C125.5 252.2 125.7 253.7 125.0 255.0C124.3 256.3 122.5 257.9 121.0 258.9C119.6 260.0 117.1 260.3 116.4 261.1C115.6 261.9 116.6 262.9 116.4 263.6C116.1 264.4 115.2 264.5 114.9 265.4C114.7 266.4 115.2 268.4 114.9 269.4C114.7 270.4 113.7 270.0 113.5 271.2C113.2 272.4 113.7 275.4 113.5 276.6C113.2 277.8 112.3 276.7 112.0 278.4C111.8 280.1 112.3 285.0 112.0 286.7C111.8 288.4 110.8 286.3 110.6 288.5C110.3 290.6 110.8 297.5 110.6 299.6C110.3 301.8 109.4 297.6 109.1 301.4C108.9 305.3 108.9 318.8 109.1 322.7C109.4 326.5 110.3 321.8 110.6 324.5C110.8 327.1 110.3 335.9 110.6 338.5C110.8 341.2 111.8 338.9 112.0 340.3C112.3 341.8 111.8 345.7 112.0 347.2C112.3 348.6 113.2 347.8 113.5 349.0C113.7 350.2 113.2 353.2 113.5 354.4C113.7 355.6 114.7 355.0 114.9 356.2C115.2 357.4 114.7 360.4 114.9 361.6C115.2 362.8 116.1 362.4 116.4 363.4C116.6 364.3 116.1 366.4 116.4 367.3C116.6 368.3 117.6 368.4 117.8 369.1C118.0 369.9 117.6 370.9 117.8 371.7C118.0 372.4 119.0 372.7 119.2 373.5C119.5 374.2 119.0 375.3 119.2 376.0C119.5 376.7 120.2 376.3 120.7 377.8C121.2 379.2 121.4 382.7 122.1 384.6C122.8 386.5 124.5 388.1 125.0 389.3C125.5 390.5 124.0 389.5 125.0 391.8C126.0 394.2 129.3 400.9 130.8 403.3C132.2 405.8 132.7 404.9 133.6 406.6C134.6 408.3 135.6 411.8 136.5 413.4C137.5 415.1 138.0 414.5 139.4 416.7C140.8 418.8 143.5 424.0 145.2 426.4C146.8 428.8 148.5 429.8 149.5 431.1C150.4 432.3 150.0 432.8 150.9 434.0C151.9 435.1 154.0 436.5 155.2 437.9C156.4 439.4 154.9 439.1 158.1 442.6C161.3 446.1 170.8 455.6 174.3 458.8C177.8 462.0 177.3 460.2 179.0 461.7C180.7 463.1 183.6 466.5 184.8 467.4C185.9 468.4 184.9 466.7 185.8 467.4C186.8 468.2 189.6 471.0 190.5 471.8C191.5 472.5 190.2 470.8 191.6 471.8C193.1 472.7 196.8 476.1 199.2 477.5C201.6 479.0 204.3 479.4 206.0 480.4C207.7 481.4 206.3 481.6 209.3 483.3C212.2 485.0 220.8 489.3 223.7 490.5C226.5 491.7 225.0 490.0 226.2 490.5C227.4 491.0 229.7 492.9 230.9 493.4C232.1 493.9 232.2 492.9 233.4 493.4C234.6 493.9 236.9 495.8 238.1 496.3C239.3 496.7 239.9 496.0 240.6 496.3C241.3 496.5 241.4 497.5 242.4 497.7C243.3 497.9 245.4 497.5 246.3 497.7C247.3 497.9 247.4 498.9 248.1 499.1C248.9 499.4 249.9 498.9 250.7 499.1C251.4 499.4 251.5 500.3 252.5 500.6C253.4 500.8 255.5 500.3 256.4 500.6C257.4 500.8 257.0 501.8 258.2 502.0C259.4 502.3 262.4 501.8 263.6 502.0C264.8 502.3 264.2 503.2 265.4 503.5C266.6 503.7 269.6 503.2 270.8 503.5C272.0 503.7 270.7 504.7 272.6 504.9C274.6 505.1 280.4 504.7 282.4 504.9C284.3 505.1 278.4 506.1 284.2 506.3C289.9 506.6 311.2 506.6 316.9 506.3C322.7 506.1 316.6 505.1 318.7 504.9C320.9 504.7 327.7 505.1 329.9 504.9C332.0 504.7 330.5 503.7 331.7 503.5C332.9 503.2 335.9 503.7 337.1 503.5C338.3 503.2 337.7 502.3 338.9 502.0C340.1 501.8 343.1 502.3 344.3 502.0C345.5 501.8 345.1 500.8 346.1 500.6C347.1 500.3 348.6 501.1 350.1 500.6C351.5 500.1 353.5 498.2 354.7 497.7C355.9 497.2 356.5 497.9 357.3 497.7C358.0 497.5 357.6 496.7 359.1 496.3C360.5 495.8 364.0 495.5 365.9 494.8C367.8 494.1 369.4 492.4 370.6 491.9C371.8 491.5 368.1 494.3 373.1 491.9C378.1 489.5 393.1 482.0 400.5 477.5C407.8 473.1 414.3 467.7 417.0 465.3C419.8 462.8 417.8 464.0 417.0 462.8C416.3 461.6 413.4 459.3 412.7 458.1C412.0 456.9 412.1 456.6 412.7 455.6C413.4 454.5 415.5 452.5 416.7 451.6C417.8 450.7 415.3 450.4 419.6 450.2C423.8 449.9 438.2 449.9 442.2 450.2C446.3 450.4 440.4 451.4 444.0 451.6C447.6 451.8 460.2 451.4 463.8 451.6C467.4 451.8 463.5 452.8 465.6 453.0C467.8 453.3 474.6 452.8 476.8 453.0C479.0 453.3 476.9 454.2 478.6 454.5C480.3 454.7 485.2 454.2 486.9 454.5C488.6 454.7 487.0 455.7 488.7 455.9C490.4 456.2 495.3 455.7 497.0 455.9C498.7 456.2 497.6 457.1 498.8 457.4C500.0 457.6 503.0 457.1 504.2 457.4C505.4 457.6 504.8 458.6 506.0 458.8C507.2 459.0 509.5 458.3 511.4 458.8C513.3 459.3 515.6 461.2 517.5 461.7C519.4 462.2 521.7 461.4 522.9 461.7C524.1 461.9 523.7 462.9 524.7 463.1C525.7 463.4 527.7 462.9 528.7 463.1C529.6 463.4 529.0 464.1 530.5 464.6C531.9 465.0 535.4 465.3 537.3 466.0C539.2 466.7 540.8 468.4 542.0 468.9C543.2 469.4 542.8 468.2 544.5 468.9C546.2 469.6 550.4 472.5 552.1 473.2C553.7 473.9 551.8 472.0 554.6 473.2C557.4 474.4 562.2 476.1 569.0 480.4C575.8 484.7 590.4 495.8 595.3 499.1C600.1 502.4 597.1 500.3 598.2 500.2C599.2 500.1 600.9 499.1 601.4 498.4C601.9 497.7 601.6 496.8 601.4 495.9C601.2 495.0 600.7 494.0 600.0 493.0C599.2 492.0 598.0 491.2 597.1 489.8C596.1 488.3 596.4 487.0 594.2 484.4C592.0 481.8 586.3 476.7 584.1 474.3C582.0 471.8 583.0 471.6 581.2 469.6C579.5 467.6 575.4 463.5 573.7 462.0C571.9 460.5 573.5 462.8 570.8 460.6C568.1 458.4 561.1 451.7 557.5 449.1C553.9 446.4 551.7 446.6 549.2 444.8C546.7 442.9 543.5 439.7 542.3 437.9C541.2 436.1 541.6 435.4 542.3 434.0C543.1 432.5 545.9 430.5 546.7 429.3C547.4 428.1 547.3 427.8 546.7 426.8C546.1 425.7 545.0 424.5 543.1 423.2C541.1 421.8 537.4 420.5 534.8 418.8C532.1 417.2 532.3 416.0 527.2 413.1C522.1 410.2 508.4 403.5 504.2 401.5C499.9 399.6 504.1 402.5 501.7 401.5C499.3 400.6 492.2 396.7 489.8 395.8C487.4 394.8 488.0 396.0 487.3 395.8C486.5 395.5 486.4 394.6 485.5 394.3C484.5 394.1 482.4 394.6 481.5 394.3C480.5 394.1 480.4 393.1 479.7 392.9C479.0 392.7 478.6 393.4 477.2 392.9C475.7 392.4 472.7 390.5 471.0 390.0C469.4 389.5 468.8 390.5 467.1 390.0C465.4 389.5 462.6 387.6 461.0 387.1C459.3 386.7 458.0 387.4 457.0 387.1C456.0 386.9 456.2 385.9 455.2 385.7C454.2 385.5 452.9 386.2 451.2 385.7C449.6 385.2 447.0 383.3 445.1 382.8C443.2 382.3 440.9 383.1 439.7 382.8C438.5 382.6 438.6 381.6 437.9 381.4C437.2 381.1 436.1 381.6 435.4 381.4C434.7 381.1 434.3 380.2 433.6 379.9C432.9 379.7 431.8 380.2 431.1 379.9C430.4 379.7 430.0 378.7 429.3 378.5C428.6 378.3 427.5 378.7 426.8 378.5C426.0 378.3 425.7 377.3 425.0 377.1C424.2 376.8 423.2 377.3 422.4 377.1C421.7 376.8 422.1 376.1 420.6 375.6C419.2 375.1 415.7 374.9 413.8 374.2C411.9 373.5 410.3 371.8 409.1 371.3C407.9 370.8 410.4 373.0 406.6 371.3C402.8 369.6 390.3 363.4 386.4 361.2C382.5 359.1 385.3 359.8 383.2 358.3C381.0 356.9 376.0 354.5 373.5 352.6C370.9 350.7 369.4 348.3 367.7 346.8C366.0 345.4 366.8 347.4 363.0 343.9C359.2 340.5 348.3 329.4 345.0 325.9C341.8 322.4 344.5 324.3 343.6 323.0C342.6 321.8 340.0 319.3 339.3 318.4C338.5 317.4 340.0 318.2 339.3 317.3C338.5 316.3 335.6 313.6 334.9 312.6C334.2 311.6 335.9 312.7 334.9 311.5C334.0 310.3 330.6 307.3 329.2 305.4C327.7 303.5 327.7 301.9 326.3 300.0C324.8 298.1 322.4 296.5 320.5 293.9C318.6 291.2 316.9 287.0 314.8 284.2C312.6 281.3 309.2 278.9 307.6 277.0C305.9 275.0 307.1 275.0 304.7 272.3C302.2 269.5 295.3 262.6 292.8 260.4C290.3 258.2 292.4 260.9 289.9 258.9C287.5 257.0 280.7 250.8 278.0 248.9C275.4 246.9 275.3 248.1 274.1 247.4C272.9 246.7 273.3 246.0 270.8 244.5C268.4 243.1 261.6 239.7 259.3 238.8C257.0 237.8 258.5 239.5 256.8 238.8C255.1 238.1 250.9 235.2 249.2 234.5C247.5 233.7 248.1 234.9 246.7 234.5C245.3 234.0 242.3 232.1 240.6 231.6C238.9 231.1 237.6 231.8 236.6 231.6C235.7 231.3 235.8 230.4 234.8 230.1C233.9 229.9 231.8 230.4 230.9 230.1C229.9 229.9 230.5 228.9 229.1 228.7C227.6 228.5 223.7 228.9 222.2 228.7C220.8 228.5 222.1 227.5 220.4 227.3C218.7 227.0 213.8 227.5 212.1 227.3C210.5 227.0 215.6 226.1 210.3 225.8C205.1 225.6 185.7 225.6 180.4 225.8C175.2 226.1 180.3 227.0 178.6 227.3C177.0 227.5 172.0 227.0 170.4 227.3C168.7 227.5 170.5 228.5 168.6 228.7C166.6 228.9 160.8 228.5 158.8 228.7C156.9 228.9 158.0 229.9 157.0 230.1C156.1 230.4 154.0 229.9 153.1 230.1C152.1 230.4 152.7 231.3 151.3 231.6C149.8 231.8 145.9 231.3 144.4 231.6C143.0 231.8 143.6 232.8 142.6 233.0C141.7 233.3 139.6 232.8 138.7 233.0C137.7 233.3 137.8 234.2 136.9 234.5C135.9 234.7 133.9 234.2 132.9 234.5C132.0 234.7 132.1 235.7 131.1 235.9C130.2 236.1 128.4 235.5 127.2 235.9C125.9 236.3 124.2 237.3 123.6 238.1ZM248.5 311.2C249.6 310.3 252.6 308.3 253.9 307.9C255.2 307.6 255.3 308.2 256.4 309.0C257.5 309.8 259.7 311.6 260.4 313.0C261.0 314.3 260.1 316.0 260.4 316.9C260.6 317.9 261.6 317.8 261.8 318.7C262.1 319.7 261.6 321.7 261.8 322.7C262.1 323.6 263.0 323.8 263.3 324.5C263.5 325.2 263.0 326.3 263.3 327.0C263.5 327.7 264.2 327.4 264.7 328.8C265.2 330.2 264.5 331.9 266.2 335.6C267.8 339.4 272.2 347.7 274.8 351.5C277.4 355.3 280.3 356.7 282.0 358.7C283.7 360.7 284.2 362.7 285.2 363.7C286.3 364.8 286.6 364.0 288.1 365.2C289.6 366.4 290.8 368.5 294.2 370.9C297.7 373.3 305.8 378.1 308.6 379.6C311.5 381.0 309.0 378.6 311.2 379.6C313.3 380.5 319.4 384.4 321.6 385.3C323.8 386.3 323.4 385.1 324.1 385.3C324.8 385.6 325.2 386.5 325.9 386.8C326.6 387.0 327.0 386.3 328.4 386.8C329.9 387.3 332.9 389.2 334.6 389.7C336.2 390.1 337.6 389.4 338.5 389.7C339.5 389.9 339.4 390.9 340.3 391.1C341.3 391.3 343.2 390.9 344.3 391.1C345.4 391.3 346.0 391.6 347.2 392.5C348.3 393.4 350.5 395.4 351.1 396.5C351.8 397.6 351.8 397.9 351.1 399.0C350.5 400.1 348.5 402.1 347.2 403.0C345.9 403.9 344.2 404.4 343.2 404.4C342.3 404.4 342.6 403.2 341.4 403.0C340.2 402.7 337.2 403.2 336.0 403.0C334.8 402.7 335.4 401.8 334.2 401.5C333.0 401.3 330.0 401.8 328.8 401.5C327.6 401.3 328.0 400.3 327.0 400.1C326.0 399.9 324.0 400.3 323.0 400.1C322.1 399.9 322.0 398.9 321.2 398.7C320.5 398.4 319.4 398.9 318.7 398.7C318.0 398.4 317.6 397.5 316.9 397.2C316.2 397.0 315.1 397.5 314.4 397.2C313.7 397.0 314.0 396.3 312.6 395.8C311.2 395.3 309.3 395.8 305.8 394.3C302.2 392.9 294.5 389.1 291.4 387.1C288.2 385.2 288.7 384.3 286.7 382.8C284.7 381.4 282.5 381.0 279.5 378.5C276.5 376.0 270.7 370.0 268.7 367.7C266.6 365.4 268.4 366.3 267.2 364.8C266.0 363.3 263.4 361.6 261.5 358.7C259.5 355.8 256.7 349.5 255.7 347.2C254.7 344.8 256.4 346.6 255.7 344.7C255.0 342.7 252.1 337.8 251.4 335.6C250.7 333.5 251.6 332.6 251.4 331.7C251.1 330.7 250.2 330.8 249.9 329.9C249.7 328.9 250.2 326.9 249.9 325.9C249.7 325.0 248.7 325.6 248.5 324.1C248.3 322.7 248.7 318.7 248.5 317.3C248.3 315.8 247.3 316.2 247.1 315.5C246.8 314.8 246.8 313.7 247.1 313.0C247.3 312.2 247.4 312.0 248.5 311.2ZM197.7 288.8C198.9 288.0 199.7 287.8 200.6 287.8C201.5 287.8 202.1 288.0 203.1 288.8C204.2 289.7 206.4 289.1 207.1 292.8C207.8 296.5 207.3 307.8 207.1 311.2C206.9 314.5 205.9 310.3 205.7 313.0C205.4 315.6 205.9 324.4 205.7 327.0C205.4 329.6 204.5 324.5 204.2 328.8C204.0 333.1 204.0 348.6 204.2 352.9C204.5 357.3 205.4 353.1 205.7 354.7C205.9 356.4 205.4 361.3 205.7 363.0C205.9 364.7 206.9 363.9 207.1 364.8C207.3 365.8 206.9 367.8 207.1 368.8C207.3 369.7 208.3 369.6 208.5 370.6C208.8 371.5 208.1 373.1 208.5 374.5C209.0 376.0 210.9 378.0 211.4 379.2C211.9 380.4 210.9 380.4 211.4 381.7C211.9 383.1 213.3 386.0 214.3 387.5C215.3 389.0 216.0 388.8 217.2 390.7C218.4 392.7 218.3 395.1 221.5 399.0C224.7 402.9 233.9 411.6 236.6 414.2C239.3 416.7 235.5 412.7 237.7 414.2C239.9 415.6 246.9 421.1 249.6 422.8C252.2 424.5 252.3 423.5 253.5 424.2C254.7 425.0 255.3 426.2 256.8 427.1C258.3 428.1 261.2 429.5 262.5 430.0C263.9 430.5 262.7 429.0 265.1 430.0C267.5 431.0 274.3 434.8 277.0 435.8C279.6 436.7 280.0 435.5 280.9 435.8C281.9 436.0 282.0 437.0 282.7 437.2C283.4 437.4 283.8 436.7 285.2 437.2C286.7 437.7 289.7 439.6 291.4 440.1C293.0 440.6 294.4 439.8 295.3 440.1C296.3 440.3 296.4 441.3 297.1 441.5C297.8 441.8 299.0 441.3 299.6 441.5C300.3 441.7 300.5 442.5 301.1 442.6C301.6 442.7 302.3 441.8 302.9 441.9C303.4 441.9 303.7 442.8 304.3 443.0C305.0 443.1 306.1 442.7 306.8 443.0C307.6 443.2 307.9 444.3 308.6 444.4C309.4 444.5 310.3 443.3 311.2 443.3C312.1 443.3 312.9 443.6 314.0 444.4C315.2 445.2 317.3 447.3 318.0 448.4C318.7 449.4 318.7 449.8 318.0 450.9C317.3 452.0 315.2 454.0 314.0 454.8C312.9 455.7 311.9 455.9 311.2 455.9C310.4 455.9 310.4 455.0 309.7 454.8C309.1 454.7 307.9 455.1 307.2 454.8C306.5 454.6 306.2 453.5 305.4 453.4C304.6 453.3 303.9 454.7 302.5 454.5C301.1 454.3 298.3 452.5 297.1 452.3C295.9 452.1 296.0 453.2 295.3 453.4C294.6 453.6 293.5 453.6 292.8 453.4C292.1 453.2 292.0 452.2 291.0 452.0C290.0 451.7 288.0 452.2 287.0 452.0C286.1 451.7 286.2 450.8 285.2 450.5C284.3 450.3 282.2 450.8 281.3 450.5C280.3 450.3 280.4 449.3 279.5 449.1C278.5 448.8 276.5 449.3 275.5 449.1C274.6 448.8 275.2 448.1 273.7 447.6C272.3 447.2 268.8 446.9 266.9 446.2C265.0 445.5 264.1 444.0 262.2 443.3C260.3 442.6 257.7 442.8 255.3 441.9C252.9 440.9 249.5 438.3 247.8 437.6C246.1 436.8 248.9 439.7 245.3 437.6C241.7 435.4 232.6 430.1 226.2 424.6C219.8 419.1 211.7 411.0 206.7 404.8C201.8 398.6 198.6 391.5 196.7 387.5C194.7 383.5 195.9 382.6 195.2 380.7C194.5 378.7 192.8 377.4 192.3 376.0C191.9 374.5 192.6 373.0 192.3 372.0C192.1 371.1 191.1 371.9 190.9 370.2C190.7 368.5 191.1 363.6 190.9 361.9C190.7 360.3 189.7 364.2 189.5 360.1C189.2 356.1 189.2 341.5 189.5 337.5C189.7 333.4 190.7 337.8 190.9 335.6C191.1 333.5 190.7 326.6 190.9 324.5C191.1 322.3 192.1 324.4 192.3 322.7C192.6 321.0 192.1 316.1 192.3 314.4C192.6 312.7 193.5 316.2 193.8 312.6C194.0 309.0 193.1 296.8 193.8 292.8C194.4 288.8 196.6 289.7 197.7 288.8ZM147.7 249.6C148.3 248.5 150.5 246.5 151.6 245.6C152.8 244.7 152.2 244.4 154.5 244.2C156.9 243.9 163.3 243.9 165.7 244.2C168.0 244.4 167.4 244.7 168.6 245.6C169.7 246.5 171.9 248.0 172.5 249.6C173.2 251.1 173.2 253.4 172.5 255.0C171.9 256.5 169.6 258.1 168.6 258.9C167.5 259.8 166.8 260.0 166.0 260.0C165.3 260.0 165.2 259.1 164.2 258.9C163.3 258.8 161.2 259.2 160.3 258.9C159.3 258.7 159.4 257.7 158.5 257.5C157.5 257.3 155.7 257.7 154.5 257.5C153.4 257.3 152.8 257.0 151.6 256.1C150.5 255.2 148.3 253.2 147.7 252.1C147.0 251.0 147.0 250.7 147.7 249.6Z" fill="#fff"/>
+          <path d="M119.2 262.5C117.4 267.7 114.4 285.8 113.5 291.7C112.5 297.7 113.6 296.3 113.5 298.2C113.3 300.1 112.6 299.2 112.4 302.9C112.2 306.5 112.2 316.5 112.4 320.2C112.6 323.8 113.3 322.5 113.5 324.8C113.6 327.2 113.2 331.6 113.5 334.2C113.7 336.8 114.7 338.5 114.9 340.3C115.2 342.1 114.7 343.7 114.9 345.0C115.2 346.3 115.9 345.9 116.4 348.3C116.8 350.7 116.4 353.7 117.8 359.4C119.2 365.1 122.0 374.8 125.0 382.5C128.0 390.1 132.9 399.4 135.8 405.1C138.7 410.8 139.6 412.2 142.6 416.7C145.6 421.2 150.7 428.1 153.8 432.2C156.9 436.2 156.9 436.4 161.0 440.8C165.1 445.2 172.6 453.2 178.6 458.4C184.6 463.7 191.4 468.6 197.0 472.5C202.6 476.3 206.4 478.5 212.1 481.5C217.8 484.5 224.3 487.8 231.2 490.5C238.2 493.2 248.0 496.0 253.9 497.7C259.8 499.4 263.7 500.1 266.5 500.6C269.3 501.1 269.8 500.4 270.8 500.6C271.9 500.8 269.8 501.2 272.6 501.7C275.5 502.1 280.9 503.2 287.8 503.5C294.7 503.8 306.1 503.9 314.0 503.5C322.0 503.0 329.9 501.5 335.6 500.6C341.4 499.6 345.4 498.7 348.6 497.7C351.9 496.7 352.9 495.5 355.1 494.8C357.3 494.1 358.0 494.8 361.9 493.4C365.9 491.9 372.2 489.5 378.9 486.2C385.5 482.8 396.1 476.9 401.9 473.2C407.7 469.5 411.6 465.8 413.4 464.2C415.2 462.6 416.0 463.8 412.7 463.5C409.5 463.1 402.7 462.3 394.0 462.0C385.2 461.8 368.8 462.3 360.1 462.0C351.4 461.8 347.3 460.8 341.8 460.6C336.2 460.4 330.9 460.8 327.0 460.6C323.1 460.4 320.9 459.4 318.4 459.2C315.8 458.9 314.9 459.6 311.9 459.2C308.9 458.7 303.5 457.1 300.4 456.6C297.2 456.2 297.5 457.3 292.8 456.3C288.1 455.3 278.7 452.7 271.9 450.5C265.1 448.4 256.9 445.2 252.1 443.3C247.3 441.4 246.9 441.2 243.1 439.0C239.3 436.8 233.5 433.5 229.1 430.4C224.6 427.2 220.4 423.6 216.5 419.9C212.6 416.3 209.1 413.0 205.7 408.4C202.2 403.8 198.3 397.9 195.6 392.5C192.9 387.2 190.7 380.0 189.5 376.3C188.2 372.7 188.2 372.4 188.0 370.6C187.8 368.8 188.2 367.0 188.0 365.5C187.8 364.1 186.8 366.7 186.6 361.9C186.3 357.1 186.3 341.7 186.6 336.7C186.8 331.7 187.5 335.8 188.0 332.0C188.5 328.3 189.0 317.6 189.5 314.0C189.9 310.4 190.7 314.3 190.9 310.4C191.1 306.6 191.1 294.8 190.9 291.0C190.7 287.2 189.7 288.8 189.5 287.8C189.2 286.7 189.9 286.4 189.5 284.9C189.0 283.3 187.9 280.6 186.6 278.4C185.2 276.2 184.0 274.1 181.5 271.9C179.1 269.7 175.6 266.9 171.8 265.1C168.0 263.2 162.7 261.7 158.8 260.7C155.0 259.8 152.7 259.5 148.8 259.3C144.9 259.1 139.5 259.1 135.4 259.3C131.4 259.5 127.3 260.2 124.6 260.7C121.9 261.3 121.1 257.4 119.2 262.5ZM177.9 253.5C178.3 254.4 183.8 255.8 187.6 258.6C191.5 261.3 198.1 267.2 201.0 270.1C203.9 273.0 203.7 273.4 204.9 275.9C206.2 278.3 207.9 282.8 208.5 284.9C209.1 287.0 208.3 287.2 208.5 288.5C208.8 289.8 209.7 289.1 210.0 292.8C210.2 296.5 210.2 306.3 210.0 310.4C209.7 314.6 208.8 314.9 208.5 317.6C208.3 320.3 208.7 324.2 208.5 326.6C208.4 329.1 207.6 328.2 207.5 332.4C207.3 336.6 207.3 348.0 207.5 351.9C207.6 355.7 208.4 353.8 208.5 355.5C208.7 357.1 207.6 357.6 208.5 361.6C209.5 365.6 212.0 374.2 214.3 379.6C216.6 385.0 219.5 389.9 222.2 394.0C224.9 398.1 227.7 401.0 230.5 404.1C233.3 407.1 234.4 408.9 239.1 412.4C243.9 415.8 253.2 421.8 258.9 425.0C264.7 428.1 267.8 429.0 273.4 431.1C278.9 433.1 284.0 435.2 292.4 437.2C300.8 439.2 317.2 442.0 323.8 443.0C330.4 443.9 329.8 442.7 332.0 443.0C334.3 443.2 334.1 444.2 337.1 444.4C340.1 444.6 345.6 444.2 350.1 444.4C354.5 444.6 355.8 445.6 363.7 445.8C371.7 446.1 390.3 445.7 397.6 445.8C404.8 446.0 400.2 446.7 407.3 446.9C414.4 447.2 433.9 447.0 440.1 447.3C446.3 447.5 440.7 448.1 444.4 448.4C448.1 448.6 457.9 448.4 462.0 448.7C466.2 449.0 466.9 449.9 469.2 450.2C471.6 450.4 472.5 449.7 476.1 450.2C479.6 450.6 487.1 452.6 490.5 453.0C493.9 453.5 493.5 452.6 496.3 453.0C499.0 453.5 504.7 455.4 507.1 455.9C509.5 456.4 508.7 455.4 510.7 455.9C512.6 456.4 515.7 458.1 518.6 458.8C521.5 459.5 524.9 459.5 527.9 460.2C530.9 461.0 531.1 461.0 536.6 463.1C542.0 465.3 554.4 470.3 560.7 473.2C567.0 476.1 568.4 476.9 574.4 480.8C580.4 484.6 593.1 494.0 596.7 496.3C600.4 498.5 597.4 495.9 596.4 494.1C595.3 492.3 593.7 489.4 590.6 485.5C587.5 481.5 581.0 474.3 577.6 470.7C574.3 467.0 574.0 466.6 570.4 463.5C566.8 460.4 561.0 455.5 556.0 452.0C551.0 448.4 547.9 446.0 540.5 442.2C533.2 438.5 521.9 432.9 512.1 429.3C502.3 425.7 491.2 422.9 481.8 420.6C472.5 418.4 461.4 416.7 456.3 416.0C451.2 415.2 452.7 416.2 451.2 416.0C449.7 415.7 449.4 414.8 447.3 414.5C445.1 414.3 441.3 414.8 438.3 414.5C435.2 414.3 433.2 413.3 428.9 413.1C424.7 412.8 416.9 413.3 412.7 413.1C408.6 412.8 408.0 411.9 404.1 411.6C400.2 411.4 393.3 411.9 389.3 411.6C385.3 411.4 383.6 410.4 379.9 410.2C376.3 409.9 370.5 410.4 367.3 410.2C364.2 409.9 363.4 409.0 361.2 408.7C359.0 408.5 355.9 409.0 354.0 408.7C352.1 408.5 351.4 407.5 349.7 407.3C348.0 407.1 345.3 407.5 343.9 407.3C342.6 407.1 343.0 406.5 341.8 406.2C340.5 406.0 337.8 406.2 336.4 405.9C334.9 405.6 335.2 404.9 333.1 404.4C331.0 403.9 328.9 404.4 323.8 403.0C318.7 401.5 308.0 397.9 302.5 395.8C297.1 393.6 295.3 392.7 291.0 390.0C286.7 387.4 280.9 383.5 276.6 379.9C272.3 376.3 268.9 372.6 265.4 368.4C261.9 364.2 258.3 359.4 255.7 354.7C253.1 350.1 251.6 345.6 249.9 340.7C248.3 335.8 246.3 328.9 245.6 325.6C244.9 322.2 245.9 322.0 245.6 320.5C245.4 319.0 244.4 317.9 244.2 316.6C243.9 315.2 244.4 313.6 244.2 312.2C243.9 310.9 243.2 310.9 242.7 308.3C242.3 305.7 242.1 300.2 241.3 296.8C240.5 293.3 239.7 290.9 238.1 287.4C236.4 283.9 233.7 278.8 231.2 275.5C228.8 272.2 227.1 270.4 223.3 267.6C219.5 264.8 213.1 261.1 208.5 258.9C204.0 256.8 199.8 255.6 195.9 254.6C192.0 253.7 188.1 253.4 185.1 253.2C182.1 253.0 177.5 252.6 177.9 253.5ZM126.4 240.6C126.0 241.8 120.1 246.6 125.0 246.7C129.9 246.8 144.7 242.2 155.6 241.3C166.5 240.4 183.4 241.1 190.2 241.3C197.0 241.5 194.5 242.5 196.3 242.7C198.1 243.0 199.8 242.5 201.0 242.7C202.2 243.0 201.7 243.7 203.5 244.2C205.3 244.7 209.1 244.9 211.8 245.6C214.4 246.3 215.4 246.5 219.3 248.5C223.2 250.5 230.7 254.3 235.2 257.5C239.6 260.7 243.3 265.0 246.0 268.0C248.7 270.9 249.9 272.9 251.4 275.2C252.8 277.4 253.1 277.4 254.6 281.3C256.1 285.2 259.2 294.1 260.4 298.6C261.6 303.1 260.9 303.8 261.8 308.3C262.8 312.7 265.0 321.0 266.2 325.2C267.4 329.4 267.5 330.0 269.0 333.5C270.5 337.0 271.6 341.1 275.2 346.1C278.7 351.1 285.2 359.0 290.3 363.7C295.3 368.5 301.2 371.9 305.4 374.5C309.6 377.2 310.4 377.5 315.5 379.6C320.5 381.6 328.0 384.6 335.6 386.8C343.3 388.9 355.9 391.6 361.2 392.5C366.5 393.5 365.4 392.3 367.3 392.5C369.3 392.8 370.2 393.7 372.7 394.0C375.3 394.2 379.7 393.7 382.5 394.0C385.2 394.2 386.1 395.2 389.3 395.4C392.5 395.7 398.4 395.2 401.5 395.4C404.7 395.6 404.3 396.3 408.0 396.5C411.8 396.7 419.8 396.6 423.9 396.9C428.0 397.2 429.6 398.1 432.5 398.3C435.4 398.5 438.5 398.1 441.2 398.3C443.8 398.5 446.1 399.5 448.4 399.7C450.6 400.0 450.4 399.0 454.8 399.7C459.3 400.5 471.0 403.3 475.0 404.1C479.0 404.8 477.9 403.8 479.0 404.1C480.0 404.3 477.9 404.5 481.5 405.5C485.0 406.5 494.9 408.4 500.2 409.8C505.5 411.3 509.0 412.5 513.2 414.2C517.4 415.8 523.0 418.6 525.4 419.6C527.9 420.5 525.1 418.6 527.9 419.9C530.8 421.2 540.1 426.5 542.3 427.5C544.6 428.5 544.6 428.1 541.6 426.0C538.6 423.9 530.7 418.5 524.3 414.9C518.0 411.3 510.1 407.4 503.5 404.4C496.9 401.5 490.0 398.9 484.7 397.2C479.5 395.5 476.2 395.5 472.1 394.3C468.0 393.1 462.7 390.7 460.2 390.0C457.8 389.3 459.9 390.7 457.4 390.0C454.8 389.4 447.6 386.8 444.8 386.1C441.9 385.3 444.9 387.0 440.4 385.7C436.0 384.4 424.3 380.7 418.1 378.5C411.9 376.3 408.2 374.9 403.3 372.7C398.5 370.6 393.8 368.2 388.9 365.5C384.1 362.8 379.3 360.2 374.2 356.5C369.0 352.9 363.1 348.2 358.0 343.6C352.9 339.0 348.6 334.6 343.6 328.8C338.5 323.0 333.2 316.1 327.7 308.6C322.2 301.2 316.6 291.7 310.4 284.2C304.3 276.6 295.9 268.2 291.0 263.3C286.1 258.3 284.8 257.4 280.9 254.6C277.1 251.8 273.4 249.2 268.0 246.3C262.5 243.5 255.2 239.8 248.5 237.3C241.8 234.9 231.9 232.5 227.6 231.6C223.4 230.6 224.4 231.8 222.9 231.6C221.5 231.3 220.6 230.4 219.0 230.1C217.4 229.9 215.0 230.4 213.2 230.1C211.4 229.9 213.2 228.9 208.2 228.7C203.2 228.5 188.3 228.5 183.3 228.7C178.3 228.9 182.1 229.7 178.3 230.1C174.5 230.6 164.2 231.1 160.6 231.6C157.1 232.1 159.4 232.5 157.0 233.0C154.6 233.5 151.2 233.4 146.2 234.5C141.3 235.5 130.8 238.1 127.5 239.1C124.2 240.2 126.9 239.3 126.4 240.6Z" fill="#028698"/>
+        </g></g>
+
+        <g clip-path="url(#lens)">
+          <!-- crane -->
+          <g stroke="#012a50" stroke-width="5" fill="none" stroke-linecap="square">
+            <path d="M170 432V176M190 432V176"/>
+            <path d="M170 420L190 396L170 372L190 348L170 324L190 300L170 276L190 252L170 228L190 204" stroke-width="3"/>
+            <path d="M126 172H452"/>
+            <path d="M170 176L300 172M190 176L400 172" stroke-width="3" opacity="0"/>
+            <path d="M180 140L126 172M180 140L452 172" stroke-width="3"/>
+            <path d="M180 120V176" />
+          </g>
+          <rect x="126" y="172" width="26" height="30" fill="#012a50"/>
+          <rect x="168" y="150" width="26" height="22" rx="2" fill="#028698" stroke="#012a50" stroke-width="3"/>
+          <path d="M360 176V292" stroke="#012a50" stroke-width="3"/>
+          <path d="M338 292H382L360 306Z" fill="#012a50"/>
+          <!-- modules -->
+          <g>
+            <rect x="150" y="370" width="150" height="62" fill="#028698"/><rect x="150" y="370" width="150" height="62" fill="url(#corr)"/>
+            <rect x="150" y="370" width="150" height="7" fill="#012a50" opacity=".35"/>
+            <rect x="300" y="370" width="150" height="62" fill="#012a50"/><rect x="300" y="370" width="150" height="62" fill="url(#corr)" opacity=".5"/>
+            <rect x="300" y="370" width="150" height="7" fill="#fff" opacity=".18"/>
+            <rect x="215" y="308" width="150" height="62" fill="#fff" stroke="#012a50" stroke-width="4"/>
+            <rect x="215" y="308" width="150" height="9" fill="#34841b"/>
+            <g fill="#d9edf0" stroke="#012a50" stroke-width="3">
+              <rect x="230" y="326" width="32" height="26"/><rect x="274" y="326" width="32" height="26"/>
+            </g>
+            <rect x="322" y="324" width="28" height="46" fill="#028698" stroke="#012a50" stroke-width="3"/>
+          </g>
+        </g>
+
+        
+
+        <!-- leaves -->
+        <g class="leaf-g">
+          <path d="M400.1 318.7C399.3 320.2 399.9 324.1 400.1 325.6C400.3 327.0 401.3 326.4 401.5 327.4C401.8 328.3 400.8 329.2 401.5 331.3C402.3 333.5 405.1 338.4 405.9 340.3C406.6 342.3 405.6 342.0 405.9 342.9C406.1 343.8 406.3 344.5 407.3 345.7C408.3 347.0 410.4 348.7 411.6 350.4C412.8 352.1 412.7 353.6 414.5 355.8C416.3 358.0 420.9 362.4 422.4 363.7C423.9 365.1 422.6 363.0 423.5 363.7C424.5 364.5 425.5 366.4 428.2 368.1C430.9 369.7 437.4 372.9 439.7 373.8C442.1 374.8 441.5 373.6 442.2 373.8C443.0 374.1 443.3 375.0 444.0 375.3C444.8 375.5 445.1 374.8 446.6 375.3C448.0 375.7 450.8 377.7 452.7 378.1C454.6 378.6 456.9 377.9 458.1 378.1C459.3 378.4 458.7 379.3 459.9 379.6C461.1 379.8 464.1 379.3 465.3 379.6C466.5 379.8 466.1 380.8 467.1 381.0C468.0 381.3 469.6 380.5 471.0 381.0C472.5 381.5 474.5 383.4 475.7 383.9C476.9 384.4 477.6 383.7 478.2 383.9C478.9 384.1 478.8 385.1 479.7 385.0C480.5 384.9 482.7 384.1 483.3 383.2C483.9 382.2 483.5 380.2 483.3 379.2C483.0 378.3 482.1 378.1 481.8 377.4C481.6 376.7 482.1 375.8 481.8 374.9C481.6 374.0 481.4 373.3 480.4 372.0C479.4 370.8 476.7 368.4 476.1 367.3C475.4 366.3 476.0 366.3 476.4 365.5C476.9 364.8 478.5 364.1 479.0 363.0C479.4 361.9 479.2 360.0 479.0 359.1C478.7 358.1 477.8 358.0 477.5 357.3C477.3 356.5 478.7 357.3 477.5 354.7C476.3 352.2 473.3 345.7 470.3 341.8C467.3 337.8 464.4 334.2 459.5 331.0C454.6 327.7 444.8 323.8 440.8 322.3C436.8 320.9 436.6 322.6 435.4 322.3C434.2 322.1 436.5 321.1 433.6 320.9C430.7 320.6 421.0 321.1 418.1 320.9C415.2 320.6 417.8 319.7 416.3 319.4C414.9 319.2 411.4 319.9 409.5 319.4C407.5 319.0 406.3 316.7 404.8 316.6C403.2 316.4 400.9 317.2 400.1 318.7ZM599.2 195.6C598.5 195.0 597.6 194.5 596.7 194.5C595.8 194.5 594.4 194.9 593.8 195.6C593.2 196.3 593.7 197.5 593.1 198.8C592.5 200.1 592.8 200.7 590.2 203.5C587.7 206.3 580.5 213.5 578.0 215.7C575.5 218.0 576.4 216.2 575.1 217.2C573.9 218.1 572.6 220.1 570.4 221.5C568.3 222.9 564.1 224.6 562.2 225.8C560.2 227.0 561.1 227.5 558.9 228.7C556.7 229.9 552.5 231.1 549.2 233.0C545.8 234.9 541.6 238.5 538.7 240.2C535.9 241.9 533.6 242.1 531.9 243.1C530.2 244.1 529.9 245.3 528.7 246.0C527.5 246.7 526.1 246.5 524.7 247.4C523.3 248.4 521.7 250.5 520.0 251.7C518.3 252.9 518.5 251.2 514.6 254.6C510.7 258.0 500.8 267.6 496.6 272.3C492.4 277.0 491.8 278.6 489.4 282.7C487.0 286.9 483.4 294.3 482.2 297.1C481.0 299.9 482.4 298.9 482.2 299.6C482.0 300.4 481.0 300.5 480.8 301.4C480.5 302.4 481.0 304.4 480.8 305.4C480.5 306.4 479.6 306.0 479.3 307.2C479.1 308.4 479.6 311.4 479.3 312.6C479.1 313.8 478.1 309.4 477.9 314.4C477.6 319.4 477.6 337.8 477.9 342.9C478.1 347.9 479.1 343.5 479.3 344.7C479.6 345.9 479.1 348.9 479.3 350.1C479.6 351.3 480.5 350.9 480.8 351.9C481.0 352.8 480.5 354.7 480.8 355.8C481.0 357.0 481.2 357.7 482.2 358.7C483.2 359.7 485.5 361.7 486.9 361.9C488.3 362.2 489.9 361.1 490.5 360.1C491.1 359.2 490.3 357.1 490.5 356.2C490.7 355.2 491.5 355.8 491.9 354.4C492.4 352.9 492.7 349.5 493.4 347.5C494.1 345.6 495.8 344.1 496.3 342.9C496.7 341.7 494.3 344.4 496.3 340.3C498.2 336.3 505.1 323.0 507.8 318.7C510.4 314.4 511.1 315.6 512.1 314.4C513.1 313.2 512.6 312.8 513.5 311.5C514.5 310.3 517.1 307.8 517.9 306.8C518.6 305.9 517.0 306.8 517.9 305.8C518.7 304.7 521.3 301.7 522.9 300.4C524.5 299.0 526.0 298.8 527.6 297.5C529.1 296.2 531.3 293.3 532.3 292.4C533.2 291.5 532.9 291.8 533.3 292.1C533.8 292.3 536.7 291.4 535.1 293.9C533.6 296.4 525.8 304.8 524.0 307.2C522.1 309.6 525.9 305.4 524.0 308.3C522.1 311.2 515.1 320.3 512.5 324.5C509.8 328.6 508.9 331.3 508.1 333.1C507.4 335.0 508.6 334.4 508.1 335.6C507.7 336.8 505.7 339.1 505.3 340.3C504.8 341.5 505.5 342.1 505.3 342.9C505.0 343.6 504.1 343.9 503.8 344.7C503.6 345.4 504.1 346.5 503.8 347.2C503.6 347.9 502.6 348.3 502.4 349.0C502.1 349.7 502.9 350.1 502.4 351.5C501.9 352.9 500.0 355.9 499.5 357.6C499.0 359.3 499.7 360.6 499.5 361.6C499.3 362.5 498.3 362.2 498.1 363.4C497.8 364.6 498.3 367.6 498.1 368.8C497.8 370.0 496.9 367.2 496.6 370.6C496.4 373.9 496.0 385.5 496.6 388.9C497.2 392.4 499.0 391.0 500.2 391.1C501.5 391.2 502.0 391.1 504.2 389.7C506.3 388.2 511.0 383.9 513.2 382.5C515.3 381.0 515.9 381.7 517.1 381.0C518.3 380.3 517.3 379.8 520.4 378.1C523.5 376.5 532.7 372.6 535.9 370.9C539.0 369.3 537.9 368.8 539.1 368.1C540.3 367.3 541.9 367.3 543.1 366.6C544.3 365.9 545.1 364.5 546.3 363.7C547.5 363.0 549.1 363.0 550.3 362.3C551.5 361.6 552.1 360.4 553.5 359.4C554.9 358.5 557.2 357.7 558.9 356.5C560.6 355.3 562.3 353.2 563.6 352.2C564.9 351.3 563.8 353.2 566.5 350.8C569.2 348.3 575.4 342.6 579.8 337.5C584.2 332.3 589.2 325.6 592.8 319.8C596.4 314.0 600.0 305.8 601.4 302.5C602.8 299.2 600.9 301.4 601.4 300.0C601.9 298.6 603.8 295.6 604.3 293.9C604.8 292.2 604.0 290.9 604.3 289.9C604.5 289.0 605.5 289.1 605.7 288.1C606.0 287.2 605.2 285.8 605.7 284.2C606.2 282.5 608.1 280.7 608.6 278.0C609.1 275.4 608.4 270.2 608.6 268.3C608.8 266.4 609.8 272.5 610.0 266.5C610.3 260.5 610.3 238.3 610.0 232.3C609.8 226.3 608.8 231.9 608.6 230.5C608.4 229.1 608.8 225.1 608.6 223.7C608.4 222.2 607.4 223.1 607.2 221.9C606.9 220.7 607.4 217.7 607.2 216.5C606.9 215.3 606.0 215.6 605.7 214.7C605.5 213.7 606.0 211.7 605.7 210.7C605.5 209.7 604.5 209.9 604.3 208.9C604.0 207.9 604.8 206.4 604.3 204.9C603.8 203.5 601.9 201.5 601.4 200.3C600.9 199.1 601.8 198.5 601.4 197.7C601.0 197.0 600.0 196.1 599.2 195.6Z" fill="#fff"/>
+          <path d="M403.0 320.2C403.0 321.9 403.5 325.9 404.8 329.9C406.0 333.8 408.3 339.7 410.5 343.9C412.8 348.1 415.8 352.2 418.1 355.1C420.4 358.0 422.1 359.4 424.2 361.2C426.4 363.1 428.6 364.7 431.1 366.3C433.6 367.8 435.6 369.1 439.4 370.6C443.1 372.1 449.0 374.2 453.4 375.3C457.8 376.3 461.3 375.6 465.6 376.7C470.0 377.8 476.9 381.3 479.3 382.1C481.7 382.9 480.1 382.6 480.0 381.7C480.0 380.9 479.7 378.8 479.0 377.1C478.2 375.3 478.4 374.6 475.7 371.3C473.1 368.0 467.5 361.0 463.1 357.3C458.7 353.5 453.6 350.9 449.4 348.6C445.2 346.3 439.7 344.7 437.9 343.6C436.1 342.5 437.9 342.4 438.6 342.1C439.4 341.9 440.5 341.7 442.6 342.1C444.7 342.6 448.1 343.8 451.2 345.0C454.4 346.3 457.4 347.1 461.3 349.7C465.3 352.3 473.1 360.0 475.0 360.5C476.9 361.0 473.9 355.2 472.8 352.6C471.8 350.0 470.0 347.2 468.5 345.0C467.1 342.8 466.1 341.3 464.2 339.3C462.3 337.2 460.2 334.9 457.0 332.8C453.8 330.7 447.9 327.9 445.1 326.6C442.3 325.4 441.6 325.4 440.1 325.2C438.6 325.0 437.7 325.4 436.1 325.2C434.5 325.0 433.5 324.1 430.4 323.8C427.2 323.5 420.8 323.6 417.4 323.4C414.0 323.2 412.4 323.0 410.2 322.3C408.0 321.7 405.6 319.8 404.4 319.4C403.2 319.1 402.9 318.4 403.0 320.2ZM597.8 198.5C596.7 196.0 597.1 197.0 596.4 198.1C595.6 199.2 594.4 203.0 593.1 204.9C591.9 206.9 591.8 206.9 588.8 209.6C585.8 212.4 580.0 217.9 575.1 221.5C570.3 225.1 567.1 226.9 559.6 231.2C552.2 235.5 537.9 242.9 530.5 247.4C523.0 252.0 520.2 254.1 515.0 258.6C509.8 263.1 503.4 269.3 499.1 274.4C494.9 279.6 492.0 284.7 489.4 289.6C486.8 294.4 484.6 300.7 483.6 303.6C482.7 306.5 483.9 306.1 483.6 307.2C483.4 308.3 482.4 308.9 482.2 310.1C482.0 311.2 482.4 312.6 482.2 314.0C482.0 315.5 481.0 314.2 480.8 318.7C480.5 323.2 480.5 336.8 480.8 341.1C481.0 345.3 482.0 343.1 482.2 344.3C482.4 345.5 482.0 347.1 482.2 348.3C482.4 349.4 483.4 350.2 483.6 351.1C483.9 352.0 483.3 352.5 483.6 353.7C484.0 354.9 485.2 357.6 485.8 358.3C486.4 359.1 486.7 359.4 487.3 358.0C487.8 356.6 487.1 355.2 489.1 350.1C491.0 344.9 496.4 332.6 499.1 327.0C501.9 321.4 502.7 320.6 505.6 316.6C508.5 312.5 511.4 307.9 516.4 302.9C521.4 297.8 529.7 290.8 535.5 286.3C541.3 281.8 547.8 278.1 551.3 275.9C554.9 273.7 555.7 273.4 556.7 273.0C557.8 272.6 557.7 273.4 557.8 273.7C557.9 274.1 561.9 270.3 557.5 275.2C553.0 280.0 538.4 294.0 531.2 302.9C524.0 311.8 518.6 320.6 514.3 328.4C509.9 336.3 507.0 345.2 505.3 350.1C503.5 354.9 504.5 355.0 503.8 357.6C503.1 360.2 501.4 363.5 500.9 365.5C500.5 367.6 501.2 368.3 500.9 369.9C500.7 371.4 499.7 371.8 499.5 374.9C499.3 378.0 499.5 386.1 499.9 388.2C500.2 390.4 499.5 389.3 501.7 387.9C503.8 386.4 508.6 382.2 512.8 379.6C517.1 377.0 521.4 375.6 527.2 372.4C533.0 369.2 541.7 364.3 547.7 360.5C553.7 356.7 558.2 353.7 563.2 349.3C568.3 345.0 574.0 339.0 578.0 334.6C582.0 330.1 584.5 326.3 587.0 322.7C589.5 319.0 590.9 316.2 592.8 312.6C594.6 309.0 596.7 304.6 598.2 301.1C599.6 297.5 600.9 293.4 601.4 291.4C601.9 289.3 600.7 291.4 601.4 288.8C602.1 286.3 604.6 279.7 605.4 276.2C606.1 272.8 605.4 270.4 605.7 268.3C606.0 266.2 606.9 269.2 607.2 263.6C607.4 258.1 607.4 240.6 607.2 235.2C606.9 229.7 606.0 232.4 605.7 230.9C605.5 229.4 606.2 229.2 605.7 226.2C605.2 223.2 604.2 217.5 602.8 212.9C601.5 208.2 598.9 200.9 597.8 198.5Z" fill="#34841b"/>
+        </g>
+      </svg>
+
+      <div class="vcard b">
+        <span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="#fff" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span><b data-i18n="cm1">All your requirements. One contact.</b><small data-i18n="cm2">Supply &amp; local coordination</small></span>
+      </div>
+      <div class="vcard a">
+        <div class="k" data-i18n="vis_k">Modular solutions</div>
+        <div class="t" data-i18n="vis_t">Space that adapts to your project.</div>
+        <div class="c" data-i18n="vis_c">Illustrative image · Configuration according to project</div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="wave-div" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 66 C240 14 480 108 760 58 C1040 8 1240 38 1440 16 V120 H0Z" fill="#d9edf0"/>
+    <path d="M0 86 C260 38 500 118 780 76 C1060 34 1250 58 1440 40 V120 H0Z" fill="#028698"/>
+    <path d="M0 86 C260 38 500 118 780 76 C1060 34 1250 58 1440 40" fill="none" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    <path d="M0 104 C280 62 520 128 800 96 C1080 64 1260 84 1440 70 V120 H0Z" fill="#012c53"/>
+  </svg>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <ul>
+      <li><svg viewBox="-10 -10 20 20" aria-hidden="true"><path data-gear="0,0,9.500,7.500,3,8" fill="#028698" fill-rule="evenodd"/></svg><span data-i18n="cat1">Equipment</span></li>
+      <li><svg viewBox="-10 -10 20 20" aria-hidden="true"><path data-gear="0,0,9.500,7.500,3,8" fill="#028698" fill-rule="evenodd"/></svg><span data-i18n="cat2">Modular solutions</span></li>
+      <li><svg viewBox="-10 -10 20 20" aria-hidden="true"><path data-gear="0,0,9.500,7.500,3,8" fill="#028698" fill-rule="evenodd"/></svg><span data-i18n="cat3">Agricultural supplies</span></li>
+      <li><svg viewBox="-10 -10 20 20" aria-hidden="true"><path data-gear="0,0,9.500,7.500,3,8" fill="#028698" fill-rule="evenodd"/></svg><span data-i18n="cat4">Construction</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Activities -->
+<section class="activities" id="activities">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="act_h" data-lines><span class="ln">Practical answers</span><span class="ln">to every requirement.</span></h2>
+      <p data-i18n="act_p">Five complementary activities for your agricultural, industrial and site requirements.</p>
+    </div>
+    <div class="tabs-layout">
+      <div class="tablist" role="tablist" aria-orientation="vertical" id="tablist"></div>
+      <article class="panel" id="panel" role="tabpanel" aria-live="polite"></article>
+    </div>
+  </div>
+</section>
+
+<!-- Local sourcing -->
+<section class="sourcing" id="sourcing">
+  <div class="wrap">
+    <div class="sourcing-box">
+      <svg class="deco" viewBox="-300 -300 600 600" aria-hidden="true"><path data-gear="0,0,296,262,226,24" fill="#fff" fill-rule="evenodd"/></svg>
+      <div>
+        <div class="k" data-i18n="src_k">Local sourcing</div>
+        <h2 data-i18n="src_h">A specific requirement to source locally?</h2>
+        <p data-i18n="src_p">We identify suppliers and coordinate enquiries for products and services available in Algeria.</p>
+      </div>
+      <a class="btn btn-light" href="#contact" data-act="5" data-i18n="src_b">Let’s talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2 data-i18n="about_h" data-lines><span class="ln">Proximity.</span><span class="ln">Clarity.</span><span class="ln">Coordination.</span></h2>
+      <p class="lede" data-i18n="about_p">SARL Enviromed supports projects in Algeria through equipment and material supply, modular solutions and construction works. We bring together technical and commercial information to define a response suited to your requirements.</p>
+      <ul class="kps">
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="#012a50" stroke-width="2"/><circle cx="12" cy="12" r="4.500" fill="none" stroke="#028698" stroke-width="2"/><circle cx="12" cy="12" r="1.400" fill="#34841b"/></svg></span>
+          <div><h3 data-i18n="kp1_t">A defined scope</h3><p data-i18n="kp1_p">Specifications, quantities and responsibilities clarified.</p></div>
+        </li>
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="3" fill="#028698"/><circle cx="18" cy="6" r="3" fill="#012a50"/><circle cx="18" cy="18" r="3" fill="#34841b"/><path d="M8.500 11L15.500 7.200M8.500 13L15.500 16.800" stroke="#012a50" stroke-width="1.800"/></svg></span>
+          <div><h3 data-i18n="kp2_t">Local coordination</h3><p data-i18n="kp2_p">Suppliers, documents and delivery arrangements followed through.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hub">
+      <div class="k" data-i18n="hub_k">Local presence</div>
+      <h3 data-i18n="hub_t">Solutions shaped around your operations.</h3>
+      <svg viewBox="0 0 520 430" role="img" aria-label="One contact connecting suppliers, documents and delivery">
+        <circle cx="260" cy="215" r="135" fill="none" stroke="#d9edf0" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round"/>
+        <g stroke="#028698" stroke-width="3">
+          <line x1="260" y1="215" x2="260" y2="112"/>
+          <line x1="260" y1="215" x2="349" y2="266"/>
+          <line x1="260" y1="215" x2="171" y2="266"/>
+        </g>
+        <!-- hub -->
+        <circle cx="260" cy="215" r="64" fill="#fff" stroke="#012a50" stroke-width="3"/>
+        <image href="assets/logo-icon.png" x="204" y="159" width="112" height="112" clip-path="circle(52px at 56px 56px)"/>
+        <!-- suppliers -->
+        <circle cx="260" cy="80" r="32" fill="#fff" stroke="#012a50" stroke-width="3"/>
+        <g transform="translate(260 80)"><path data-gear="0,0,17,13,5,10" fill="#028698" fill-rule="evenodd"/></g>
+        <text x="260" y="34" data-i18n="hub_n1">Suppliers</text>
+        <!-- documents -->
+        <circle cx="377" cy="282" r="32" fill="#fff" stroke="#012a50" stroke-width="3"/>
+        <g transform="translate(377 282)" fill="none" stroke="#012a50" stroke-width="2.600" stroke-linecap="round"><rect x="-11" y="-14" width="22" height="28" rx="3"/><path d="M-5 -5H5M-5 1H5M-5 7H1" stroke="#028698"/></g>
+        <text x="377" y="341" data-i18n="hub_n2">Documents</text>
+        <!-- delivery -->
+        <circle cx="143" cy="282" r="32" fill="#fff" stroke="#012a50" stroke-width="3"/>
+        <g transform="translate(143 282)"><rect x="-16" y="-9" width="32" height="18" fill="#34841b"/><path d="M-9 -9V9M-3 -9V9M3 -9V9M9 -9V9" stroke="#fff" stroke-width="1.500" opacity=".5"/><path d="M-16 13H16" stroke="#012a50" stroke-width="2.600" stroke-linecap="round"/></g>
+        <text x="143" y="341" data-i18n="hub_n3">Delivery</text>
+        <!-- pin -->
+        <g transform="translate(260 388)">
+          <path d="M0 14C-9 4-14-2-14-9a14 14 0 0 1 28 0c0 7-5 13-14 23Z" transform="translate(-86 -14) scale(.9)" fill="#34841b"/>
+          <circle cx="-86" cy="-15" r="4" fill="#fff"/>
+          <text x="-62" y="-9" style="text-anchor:start;font-size:16px">Dar El Beida, Alger</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Approach -->
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="app_h" data-lines><span class="ln">A clear project,</span><span class="ln">at every stage.</span></h2>
+      <p data-i18n="app_p">A simple process to turn your enquiry into an agreed scope of supply or works.</p>
+    </div>
+    <div class="steps" id="steps">
+      <svg class="wavebg" id="wavebg" viewBox="0 0 1200 112" preserveAspectRatio="none" aria-hidden="true"><path id="stepwave" fill="none" stroke="#028698" stroke-width="4" vector-effect="non-scaling-stroke" stroke-linecap="round"/><path id="stepwave2" fill="none" stroke="#d9edf0" stroke-width="4" vector-effect="non-scaling-stroke" stroke-linecap="round" transform="translate(0 12)"/></svg>
+      <div class="step">
+        <div class="node"><svg viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="46" fill="#fff"/><path data-gear="56,56,54,47,41,18" fill="#012a50" fill-rule="evenodd"/></svg><b>1</b></div>
+        <h3 data-i18n="s1_t">Understand</h3>
+        <p data-i18n="s1_p">Tell us your requirement, specifications, quantities, location and preferred timing.</p>
+      </div>
+      <div class="step">
+        <div class="node"><svg viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="46" fill="#fff"/><path data-gear="56,56,54,47,41,18" fill="#028698" fill-rule="evenodd"/></svg><b>2</b></div>
+        <h3 data-i18n="s2_t">Define &amp; propose</h3>
+        <p data-i18n="s2_p">We clarify the scope and availability, then present the technical and commercial details.</p>
+      </div>
+      <div class="step">
+        <div class="node"><svg viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="46" fill="#fff"/><path data-gear="56,56,54,47,41,18" fill="#34841b" fill-rule="evenodd"/></svg><b>3</b></div>
+        <h3 data-i18n="s3_t">Coordinate</h3>
+        <p data-i18n="s3_p">Following agreement, we coordinate the parties, documents and agreed delivery or execution arrangements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-i18n="con_h" data-lines><span class="ln">Tell us what</span><span class="ln">you need.</span></h2>
+      <p class="lede" data-i18n="con_p">A product reference, technical specification or project idea: let’s start a conversation.</p>
+      <ul class="cinfo">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.500" y="5" width="19" height="14" rx="2" fill="none" stroke="#012a50" stroke-width="2"/><path d="M3.500 7l8.500 6.500L20.500 7" fill="none" stroke="#028698" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22C6.500 16 4.500 12.500 4.500 9.500a7.500 7.500 0 0 1 15 0c0 3-2 6.500-7.500 12.500Z" fill="#34841b"/><circle cx="12" cy="9.500" r="2.800" fill="#fff"/></svg>
+          <address style="font-style:normal">Cité des travailleurs, lot 01, N° 07<br>Dar El Beida, Alger<span class="country" data-i18n="country">ALGERIA</span></address></li>
+      </ul>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <h3 data-i18n="form_t">Your quotation enquiry</h3>
+      <div class="fields">
+        <div class="field"><label for="f-name" data-i18n="l_name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-company" data-i18n="l_company">Company</label><input id="f-company" name="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-email" data-i18n="l_email">Email address</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-act" data-i18n="l_act">Activity</label><select id="f-act" name="activity"></select></div>
+        <div class="field full"><label for="f-msg" data-i18n="l_msg">Describe your requirement</label><textarea id="f-msg" name="message" required></textarea></div>
+      </div>
+      <p class="help" data-i18n="form_help">The button prepares an email in your mail app. You can review your enquiry and attach your documents before sending.</p>
+      <div class="submit"><button class="btn btn-primary" type="submit" data-i18n="form_btn">Prepare my enquiry</button></div>
+      <p class="confirm" id="confirm" role="status" data-i18n="form_ok">Your email draft has been requested. If your mail app does not open, email us directly at contact@enviromed-dz.com.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <svg class="wave-top" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C260 -6 520 80 800 40 C1080 0 1260 30 1440 8 V90 H0Z" fill="#028698"/>
+    <path d="M0 40 C260 -6 520 80 800 40 C1080 0 1260 30 1440 8" fill="none" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke" transform="translate(0 8)"/>
+    <path d="M0 62 C280 22 540 90 820 62 C1100 34 1270 54 1440 40 V90 H0Z" fill="#012c53"/>
+  </svg>
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <span class="ico"><img src="assets/logo-icon.png" alt="" width="76" height="76"></span>
+      <div><b>SARL Enviromed</b><span data-i18n="foot_tag" data-lines><span class="ln">Equipment supply.</span><span class="ln">Modular solutions. Construction.</span></span></div>
+    </div>
+    <div class="foot-links">
+      <a href="#activities" data-i18n="nav_activities">Our activities</a>
+      <a href="#about" data-i18n="nav_about">About us</a>
+      <a href="#approach" data-i18n="nav_approach">Our approach</a>
+    </div>
+    <div class="foot-links">
+      <a class="mail" href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a>
+      <span>Cité des travailleurs, lot 01, N° 07<br>Dar El Beida, Alger</span>
+      <span data-i18n="country">ALGERIA</span>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <div class="wrap">
+      <span>© 2026 SARL Enviromed</span>
+      <span data-i18n="foot_prop">Design proposal · Illustrative images</span>
+      <a href="#top" data-i18n="back_top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= Content (EN / FR / AR) ================= */
+const I18N = {
+en:{
+ title:"SARL Enviromed — Equipment, modular solutions and construction in Algeria",
+ menu:"Menu", tagline:"Your local partner in Algeria",
+ nav_activities:"Our activities", nav_about:"About us", nav_approach:"Our approach", cta_quote:"Request a quotation",
+ h1:"Equipment.\nSolutions.\nYour projects.",
+ hero_p:"Equipment supply, modular workspaces and construction. A local point of contact to move your projects forward in Algeria.",
+ hero_b1:"Let’s discuss your project", hero_b2:"Explore our activities",
+ hero_note:"From the initial requirement to delivery coordination.",
+ vis_k:"Modular solutions", vis_t:"Space that adapts to your project.", vis_c:"Illustrative image · Configuration according to project",
+ cm1:"All your requirements. One contact.", cm2:"Supply & local coordination",
+ cat1:"Equipment", cat2:"Modular solutions", cat3:"Agricultural supplies", cat4:"Construction",
+ act_h:"Practical answers\nto every requirement.", act_p:"Five complementary activities for your agricultural, industrial and site requirements.",
+ act_btn:"Let’s discuss your project", act_note:"Specifications, availability and terms to be confirmed for your enquiry. Illustrative image.",
+ acts:[
+  {t:"Container supply", s:"Sizes and configurations for storage, transport and the requirements of your site.", d:"New and used standard, refrigerated and specialist containers sourced according to your requirements.", l:["Container dimensions and type","Condition and intended use","Quantity, documentation and delivery location"]},
+  {t:"Modular workspaces", s:"Container spaces configured and fitted out around your project.", d:"Supply, conversion and installation of individual or interconnected modules within an agreed scope.", l:["Offices, site facilities and meeting rooms","Insulation, partitions and agreed fit-out","Installation, supports and connections according to the project"]},
+  {t:"Tipper trailers", s:"Transport solutions for road, agricultural and construction operations.", d:"Supply of road tipper semi-trailers and agricultural trailers according to the requested specifications.", l:["Capacity and payload","Axles, tyres, brakes and tipping system","Tractor compatibility and delivery location"]},
+  {t:"Chemical fertilisers", s:"Formulations, quantities and packaging to meet your request.", d:"Fertiliser supply according to the product type, composition and delivery conditions requested.", l:["Formulation and nutrient content","Bags, big bags and available packaging","Technical documentation and safety information"]},
+  {t:"Construction & works", s:"General construction, civil engineering and works associated with your projects.", d:"Coordination of works for agricultural, industrial, commercial and site-development needs.", l:["Earthworks, foundations and platforms","Buildings, structural works and finishing","Utilities and site development within the agreed scope"]}
+ ],
+ src_k:"Local sourcing", src_h:"A specific requirement to source locally?", src_p:"We identify suppliers and coordinate enquiries for products and services available in Algeria.", src_b:"Let’s talk",
+ about_h:"Proximity.\nClarity.\nCoordination.",
+ about_p:"SARL Enviromed supports projects in Algeria through equipment and material supply, modular solutions and construction works. We bring together technical and commercial information to define a response suited to your requirements.",
+ hub_k:"Local presence", hub_t:"Solutions shaped around your operations.",
+ hub_n1:"Suppliers", hub_n2:"Documents", hub_n3:"Delivery",
+ kp1_t:"A defined scope", kp1_p:"Specifications, quantities and responsibilities clarified.",
+ kp2_t:"Local coordination", kp2_p:"Suppliers, documents and delivery arrangements followed through.",
+ app_h:"A clear project,\nat every stage.", app_p:"A simple process to turn your enquiry into an agreed scope of supply or works.",
+ s1_t:"Understand", s1_p:"Tell us your requirement, specifications, quantities, location and preferred timing.",
+ s2_t:"Define & propose", s2_p:"We clarify the scope and availability, then present the technical and commercial details.",
+ s3_t:"Coordinate", s3_p:"Following agreement, we coordinate the parties, documents and agreed delivery or execution arrangements.",
+ con_h:"Tell us what\nyou need.", con_p:"A product reference, technical specification or project idea: let’s start a conversation.", country:"ALGERIA",
+ form_t:"Your quotation enquiry", l_name:"Your name", l_company:"Company", l_email:"Email address", l_act:"Activity", l_msg:"Describe your requirement",
+ form_help:"The button prepares an email in your mail app. You can review your enquiry and attach your documents before sending.",
+ form_btn:"Prepare my enquiry", form_ok:"Your email draft has been requested. If your mail app does not open, email us directly at contact@enviromed-dz.com.",
+ foot_tag:"Equipment supply.\nModular solutions. Construction.", back_top:"Back to top", foot_prop:"Design proposal · Illustrative images"
+},
+fr:{
+ title:"SARL Enviromed — Équipements, solutions modulaires et construction en Algérie",
+ menu:"Menu", tagline:"Votre partenaire local en Algérie",
+ nav_activities:"Nos activités", nav_about:"À propos", nav_approach:"Notre démarche", cta_quote:"Demander un devis",
+ h1:"Des équipements.\nDes solutions.\nVos projets.",
+ hero_p:"Fourniture d’équipements, espaces modulaires et construction. Un interlocuteur local pour faire avancer vos projets en Algérie.",
+ hero_b1:"Parlons de votre projet", hero_b2:"Découvrir nos activités",
+ hero_note:"Du besoin initial à la coordination de la livraison.",
+ vis_k:"Solutions modulaires", vis_t:"L’espace qui s’adapte à votre projet.", vis_c:"Visuel d’illustration · Configuration selon projet",
+ cm1:"Tous vos besoins. Un seul interlocuteur.", cm2:"Fourniture & coordination locale",
+ cat1:"Équipements", cat2:"Solutions modulaires", cat3:"Fournitures agricoles", cat4:"Construction",
+ act_h:"Des réponses concrètes\nà chaque besoin.", act_p:"Cinq activités complémentaires pour vos besoins agricoles, industriels et de chantier.",
+ act_btn:"Parlons de votre projet", act_note:"Spécifications, disponibilité et conditions à confirmer selon votre demande. Visuel d’illustration.",
+ acts:[
+  {t:"Fourniture de conteneurs", s:"Des formats et configurations adaptés au stockage, au transport et aux besoins de votre site.", d:"Conteneurs neufs ou d’occasion, standards, frigorifiques et spécialisés, recherchés selon votre besoin.", l:["Dimensions et type de conteneur","État et usage prévu","Quantité, documentation et lieu de livraison"]},
+  {t:"Espaces de travail modulaires", s:"Des espaces en conteneurs, configurés et aménagés autour de votre projet.", d:"Fourniture, transformation et installation de modules individuels ou interconnectés selon un périmètre défini.", l:["Bureaux, installations de chantier et salles de réunion","Isolation, cloisons et aménagements convenus","Installation, supports et raccordements selon projet"]},
+  {t:"Remorques bennes", s:"Des solutions de transport pour vos opérations routières, agricoles et de chantier.", d:"Fourniture de semi-remorques bennes routières et de remorques agricoles selon les caractéristiques demandées.", l:["Capacité et charge utile","Essieux, pneus, freinage et système de bennage","Compatibilité de traction et lieu de livraison"]},
+  {t:"Engrais chimiques", s:"Les formulations, quantités et conditionnements qui répondent à votre demande.", d:"Fourniture d’engrais selon le type de produit, la composition et les conditions de livraison demandés.", l:["Formulation et titre en éléments nutritifs","Sacs, big bags et conditionnements disponibles","Documentation technique et informations de sécurité"]},
+  {t:"Construction & travaux", s:"Construction générale, génie civil et travaux associés à vos projets.", d:"Coordination de travaux pour les besoins agricoles, industriels, commerciaux et d’aménagement de sites.", l:["Terrassement, fondations et plateformes","Bâtiments, travaux de structure et de finition","Réseaux et aménagements selon le périmètre convenu"]}
+ ],
+ src_k:"Approvisionnement local", src_h:"Un besoin spécifique à sourcer localement ?", src_p:"Nous recherchons les fournisseurs et coordonnons les consultations pour les produits et prestations disponibles en Algérie.", src_b:"Échangeons",
+ about_h:"La proximité.\nLa clarté.\nLa coordination.",
+ about_p:"SARL Enviromed accompagne les projets en Algérie par la fourniture d’équipements et de matériaux, les solutions modulaires et les travaux. Nous réunissons les informations techniques et commerciales pour définir une réponse adaptée à votre besoin.",
+ hub_k:"Ancrage local", hub_t:"Des solutions pensées pour vos opérations.",
+ hub_n1:"Fournisseurs", hub_n2:"Documents", hub_n3:"Livraison",
+ kp1_t:"Un périmètre défini", kp1_p:"Spécifications, quantités et responsabilités clarifiées.",
+ kp2_t:"Une coordination locale", kp2_p:"Fournisseurs, documents et modalités de livraison suivis.",
+ app_h:"Un projet clair,\nà chaque étape.", app_p:"Une démarche simple pour passer de votre demande à un périmètre de fourniture ou de travaux convenu.",
+ s1_t:"Comprendre", s1_p:"Vous nous présentez votre besoin, les spécifications, les quantités, le lieu et les délais souhaités.",
+ s2_t:"Définir & proposer", s2_p:"Nous clarifions le périmètre et les disponibilités, puis présentons les éléments techniques et commerciaux.",
+ s3_t:"Coordonner", s3_p:"Après accord, nous coordonnons les intervenants, les documents et les modalités de livraison ou d’exécution convenues.",
+ con_h:"Présentez-nous\nvotre besoin.", con_p:"Une référence produit, un cahier des charges ou une idée de projet : commençons par en parler.", country:"ALGÉRIE",
+ form_t:"Votre demande de devis", l_name:"Votre nom", l_company:"Entreprise", l_email:"Adresse e-mail", l_act:"Activité concernée", l_msg:"Décrivez votre besoin",
+ form_help:"Le bouton prépare un e-mail dans votre messagerie. Vous pourrez vérifier votre demande et joindre vos documents avant l’envoi.",
+ form_btn:"Préparer ma demande", form_ok:"La préparation de votre e-mail a été demandée. Si votre messagerie ne s’ouvre pas, écrivez directement à contact@enviromed-dz.com.",
+ foot_tag:"Fourniture d’équipements.\nSolutions modulaires. Construction.", back_top:"Retour en haut", foot_prop:"Proposition de design · Visuels d’illustration"
+},
+ar:{
+ title:"SARL Enviromed — معدات وحلول معيارية وبناء في الجزائر",
+ menu:"القائمة", tagline:"شريككم المحلي في الجزائر",
+ nav_activities:"أنشطتنا", nav_about:"من نحن", nav_approach:"منهجيتنا", cta_quote:"اطلب عرض سعر",
+ h1:"معدات.\nحلول.\nمشاريعكم.",
+ hero_p:"توريد المعدات ومساحات العمل المعيارية والبناء. جهة اتصال محلية لدعم تقدم مشاريعكم في الجزائر.",
+ hero_b1:"لنتحدث عن مشروعكم", hero_b2:"تعرّف على أنشطتنا",
+ hero_note:"من تحديد الاحتياج إلى تنسيق التسليم.",
+ vis_k:"حلول المساحات المعيارية", vis_t:"مساحة تتكيف مع مشروعكم.", vis_c:"صورة توضيحية · التكوين حسب المشروع",
+ cm1:"جميع احتياجاتكم. جهة اتصال واحدة.", cm2:"توريد وتنسيق محلي",
+ cat1:"المعدات", cat2:"الحلول المعيارية", cat3:"المستلزمات الزراعية", cat4:"البناء",
+ act_h:"حلول عملية\nلكل احتياج.", act_p:"خمسة أنشطة متكاملة لاحتياجاتكم الزراعية والصناعية ومواقع الأشغال.",
+ act_btn:"لنتحدث عن مشروعكم", act_note:"تُؤكّد المواصفات والتوفر والشروط وفق طلبكم. الصورة توضيحية.",
+ acts:[
+  {t:"توريد الحاويات", s:"مقاسات وتكوينات تناسب التخزين والنقل ومتطلبات موقعكم.", d:"توفير حاويات جديدة أو مستعملة، عادية أو مبردة أو متخصصة، وفق احتياجاتكم.", l:["أبعاد الحاوية ونوعها","الحالة والاستخدام المقصود","الكمية والوثائق ومكان التسليم"]},
+  {t:"مساحات العمل المعيارية", s:"مساحات في حاويات، تُصمّم وتُجهّز وفق متطلبات مشروعكم.", d:"توريد وتحويل وتركيب وحدات منفردة أو مترابطة ضمن نطاق متفق عليه.", l:["مكاتب ومرافق مواقع وقاعات اجتماعات","العزل والقواطع والتجهيزات المتفق عليها","التركيب والدعامات والتوصيلات حسب المشروع"]},
+  {t:"المقطورات القلابة", s:"حلول نقل للعمليات على الطرق وفي الزراعة ومواقع الأشغال.", d:"توريد أنصاف مقطورات قلابة للطرق ومقطورات زراعية وفق المواصفات المطلوبة.", l:["السعة والحمولة","المحاور والإطارات والفرامل ونظام القلب","توافق الجر ومكان التسليم"]},
+  {t:"الأسمدة الكيميائية", s:"تركيبات وكميات وأشكال تعبئة تناسب طلبكم.", d:"توريد الأسمدة حسب نوع المنتج والتركيبة وشروط التسليم المطلوبة.", l:["التركيبة ونسبة العناصر الغذائية","الأكياس والأكياس الكبيرة وأشكال التعبئة المتاحة","الوثائق التقنية ومعلومات السلامة"]},
+  {t:"البناء والأشغال", s:"البناء العام والهندسة المدنية والأشغال المرتبطة بمشاريعكم.", d:"تنسيق الأشغال للاحتياجات الزراعية والصناعية والتجارية وتهيئة المواقع.", l:["الأعمال الترابية والأساسات والمنصات","المباني والأشغال الإنشائية والتشطيبات","الشبكات والتهيئة ضمن النطاق المتفق عليه"]}
+ ],
+ src_k:"التوريد المحلي", src_h:"هل لديكم احتياج محدد للتوريد محلياً؟", src_p:"نبحث عن الموردين وننسّق الاستفسارات للمنتجات والخدمات المتوفرة في الجزائر.", src_b:"لنتواصل",
+ about_h:"القرب.\nالوضوح.\nالتنسيق.",
+ about_p:"تدعم SARL Enviromed المشاريع في الجزائر من خلال توريد المعدات والمواد والحلول المعيارية والأشغال. نجمع المعلومات التقنية والتجارية لتحديد استجابة تناسب احتياجاتكم.",
+ hub_k:"حضور محلي", hub_t:"حلول تناسب عملياتكم.",
+ hub_n1:"الموردون", hub_n2:"الوثائق", hub_n3:"التسليم",
+ kp1_t:"نطاق محدد", kp1_p:"توضيح المواصفات والكميات والمسؤوليات.",
+ kp2_t:"تنسيق محلي", kp2_p:"متابعة الموردين والوثائق وترتيبات التسليم.",
+ app_h:"مشروع واضح،\nفي كل مرحلة.", app_p:"خطوات بسيطة للانتقال من طلبكم إلى نطاق توريد أو أشغال متفق عليه.",
+ s1_t:"الفهم", s1_p:"أخبرونا باحتياجاتكم والمواصفات والكميات والموقع والمواعيد المطلوبة.",
+ s2_t:"التحديد والاقتراح", s2_p:"نوضّح النطاق والتوفر، ثم نعرض التفاصيل التقنية والتجارية.",
+ s3_t:"التنسيق", s3_p:"بعد الاتفاق، ننسّق بين الأطراف ونتابع الوثائق وترتيبات التسليم أو التنفيذ المتفق عليها.",
+ con_h:"أخبرونا\nباحتياجاتكم.", con_p:"مرجع منتج أو دفتر شروط أو فكرة مشروع: لنبدأ بالتواصل.", country:"الجزائر",
+ form_t:"طلب عرض السعر", l_name:"الاسم", l_company:"الشركة", l_email:"البريد الإلكتروني", l_act:"النشاط المعني", l_msg:"صفوا احتياجاتكم",
+ form_help:"يُعدّ الزر رسالة في تطبيق بريدكم. يمكنكم مراجعة الطلب وإرفاق الوثائق قبل إرسال الرسالة.",
+ form_btn:"إعداد الطلب", form_ok:"تم طلب إعداد رسالة البريد. إذا لم يُفتح التطبيق، راسلونا مباشرة على contact@enviromed-dz.com.",
+ foot_tag:"توريد المعدات.\nحلول المساحات المعيارية. البناء.", back_top:"العودة إلى الأعلى", foot_prop:"مقترح تصميم · صور توضيحية"
+}};
+
+/* ================= Illustrations for the five activities ================= */
+const ART = {
+ container:`<svg viewBox="0 0 420 300" role="img" aria-label="Stacked shipping containers"><defs><pattern id="c1" width="9" height="10" patternUnits="userSpaceOnUse"><rect width="2.500" height="10" fill="#000" opacity=".16"/></pattern></defs>
+  <circle cx="210" cy="170" r="132" fill="#fff"/><rect y="250" width="420" height="50" fill="#d9edf0"/>
+  <g><rect x="52" y="186" width="156" height="64" fill="#028698"/><rect x="52" y="186" width="156" height="64" fill="url(#c1)"/><rect x="52" y="186" width="156" height="7" fill="#012a50" opacity=".4"/>
+  <rect x="212" y="186" width="156" height="64" fill="#012a50"/><rect x="212" y="186" width="156" height="64" fill="url(#c1)" opacity=".5"/>
+  <rect x="132" y="122" width="156" height="64" fill="#34841b"/><rect x="132" y="122" width="156" height="64" fill="url(#c1)"/><rect x="132" y="122" width="156" height="7" fill="#012a50" opacity=".4"/></g>
+  <g stroke="#012a50" stroke-width="3" fill="none"><path d="M52 276H208M52 270V282M208 270V282"/></g>
+  <g fill="#fff" opacity=".9"><rect x="64" y="204" width="3" height="30"/><rect x="224" y="204" width="3" height="30"/><rect x="144" y="140" width="3" height="30"/></g></svg>`,
+ modular:`<svg viewBox="0 0 420 300" role="img" aria-label="Interconnected modular container offices"><circle cx="210" cy="170" r="132" fill="#fff"/><rect y="250" width="420" height="50" fill="#d9edf0"/>
+  <rect x="60" y="150" width="190" height="100" fill="#fff" stroke="#012a50" stroke-width="5"/><rect x="250" y="150" width="112" height="100" fill="#fff" stroke="#012a50" stroke-width="5"/>
+  <rect x="55" y="140" width="312" height="12" fill="#012a50"/><rect x="60" y="152" width="190" height="8" fill="#028698"/><rect x="250" y="152" width="112" height="8" fill="#34841b"/>
+  <g fill="#d9edf0" stroke="#012a50" stroke-width="4"><rect x="80" y="178" width="46" height="36"/><rect x="138" y="178" width="46" height="36"/><rect x="272" y="178" width="46" height="36"/></g>
+  <g stroke="#012a50" stroke-width="3"><path d="M103 178V214M161 178V214M295 178V214"/></g>
+  <rect x="200" y="176" width="34" height="74" fill="#028698" stroke="#012a50" stroke-width="4"/><circle cx="226" cy="214" r="3" fill="#fff"/>
+  <path d="M190 250h54M196 262h42" stroke="#012a50" stroke-width="5"/><rect x="326" y="120" width="30" height="20" fill="#012a50"/><path d="M332 130h18" stroke="#8fd3dd" stroke-width="3"/>
+  <path d="M340 215v35" stroke="#012a50" stroke-width="3"/></svg>`,
+ trailer:`<svg viewBox="0 0 420 300" role="img" aria-label="Tipper trailer with raised body"><circle cx="210" cy="170" r="132" fill="#fff"/><rect y="250" width="420" height="50" fill="#d9edf0"/>
+  <g transform="rotate(-17 356 222)"><path d="M70 150H356V222H92Z" fill="#028698"/><path d="M70 150H356V160H70Z" fill="#012a50"/><g stroke="#fff" stroke-width="3" opacity=".6"><path d="M130 160V218M180 160V218M230 160V218M280 160V218M330 160V218"/></g></g>
+  <rect x="62" y="222" width="310" height="14" fill="#012a50"/><path d="M190 222L168 176" stroke="#012a50" stroke-width="9" stroke-linecap="round"/><path d="M190 222L176 190" stroke="#8fd3dd" stroke-width="4" stroke-linecap="round"/>
+  <rect x="50" y="214" width="26" height="22" fill="#012a50"/><path d="M110 236V250" stroke="#012a50" stroke-width="8"/>
+  <g><circle cx="262" cy="244" r="22" fill="#012a50"/><circle cx="262" cy="244" r="9" fill="#fff"/><circle cx="312" cy="244" r="22" fill="#012a50"/><circle cx="312" cy="244" r="9" fill="#fff"/><circle cx="362" cy="244" r="22" fill="#012a50"/><circle cx="362" cy="244" r="9" fill="#fff"/></g>
+  <path d="M372 228c14 6 20 14 26 22" stroke="#34841b" stroke-width="6" fill="none" stroke-linecap="round" opacity="0"/></svg>`,
+ fert:`<svg viewBox="0 0 420 300" role="img" aria-label="Bags and big bag of fertiliser"><circle cx="210" cy="170" r="132" fill="#fff"/><rect y="250" width="420" height="50" fill="#d9edf0"/>
+  <g stroke="#012a50" stroke-width="4" stroke-linejoin="round">
+   <path d="M62 250V168q0-8 8-8h60q8 0 8 8V250Z" fill="#fff"/><path d="M150 250V168q0-8 8-8h60q8 0 8 8V250Z" fill="#fff"/><path d="M238 250V168q0-8 8-8h60q8 0 8 8V250Z" fill="#fff"/>
+   <path d="M106 160V72q0-8 8-8h60q8 0 8 8V160Z" fill="#fff"/><path d="M194 160V72q0-8 8-8h60q8 0 8 8V160Z" fill="#fff"/></g>
+  <g fill="#028698"><rect x="72" y="190" width="56" height="34"/><rect x="160" y="190" width="56" height="34"/><rect x="248" y="190" width="56" height="34"/><rect x="116" y="86" width="56" height="34"/><rect x="204" y="86" width="56" height="34"/></g>
+  <g fill="#fff" font-family="Figtree,sans-serif" font-weight="800" font-size="15" text-anchor="middle"><text x="100" y="212">NPK</text><text x="188" y="212">NPK</text><text x="276" y="212">NPK</text><text x="144" y="108">NPK</text><text x="232" y="108">NPK</text></g>
+  <g fill="#34841b"><path d="M80 176c6-8 16-10 24-10-1 9-8 14-24 10Z"/><path d="M168 176c6-8 16-10 24-10-1 9-8 14-24 10Z"/><path d="M256 176c6-8 16-10 24-10-1 9-8 14-24 10Z"/></g>
+  <g stroke="#012a50" stroke-width="4"><rect x="328" y="146" width="72" height="104" fill="#e9f4f6"/><path d="M332 146q-6-26 4-30M396 146q6-26-4-30M356 146q-2-22 0-26M372 146q2-22 0-26" fill="none" stroke-linecap="round"/><path d="M328 190H400" stroke-width="3"/></g>
+  <path d="M346 214c8-12 22-14 34-14-1 14-12 22-34 14Z" fill="#34841b"/></svg>`,
+ works:`<svg viewBox="0 0 420 300" role="img" aria-label="Building under construction with a tower crane"><circle cx="210" cy="170" r="132" fill="#fff"/><rect y="250" width="420" height="50" fill="#d9edf0"/>
+  <g fill="#012a50"><rect x="60" y="232" width="236" height="10"/><rect x="60" y="188" width="236" height="10"/><rect x="60" y="144" width="236" height="10"/>
+  <rect x="64" y="144" width="10" height="106"/><rect x="176" y="144" width="10" height="106"/><rect x="282" y="144" width="10" height="106"/></g>
+  <g fill="#028698"><rect x="76" y="200" width="100" height="32"/><rect x="186" y="200" width="96" height="32"/></g>
+  <g stroke="#fff" stroke-width="2" opacity=".7"><path d="M76 216H176M186 216H282M108 200V232M140 200V232M218 200V232M250 200V232"/></g>
+  <rect x="76" y="156" width="46" height="32" fill="#34841b"/><path d="M60 144H296" stroke="#012a50" stroke-width="4"/>
+  <g stroke="#012a50" stroke-width="5" fill="none"><path d="M338 250V58M356 250V58"/><path d="M338 240L356 218L338 196L356 174L338 152L356 130L338 108L356 86" stroke-width="3"/><path d="M276 54H410"/><path d="M347 22L276 54M347 22L410 54" stroke-width="3"/><path d="M347 22V58"/></g>
+  <rect x="332" y="40" width="30" height="24" rx="2" fill="#028698" stroke="#012a50" stroke-width="3"/><rect x="396" y="54" width="22" height="26" fill="#012a50"/>
+  <path d="M300 54V132" stroke="#012a50" stroke-width="3"/><rect x="278" y="132" width="44" height="12" fill="#012a50"/><rect x="284" y="120" width="32" height="12" fill="#34841b"/></svg>`
+};
+const ART_KEYS=['container','modular','trailer','fert','works'];
+/* Pexels photos (free licence). A key with no entry, or an image that fails to load, falls back to the SVG illustration. */
+const PX=id=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1200&h=640&fit=crop`;
+const PHOTOS={
+  container:{src:PX(906494),alt:'Colourful stacked shipping containers in a port'},
+  works:{src:PX(14265867),alt:'Construction site with cranes and a building going up'}
+};
+const CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#34841b"/><path d="M7 12.500l3.200 3.200L17 9" fill="none" stroke="#fff" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* ================= Helpers ================= */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+let lang='en', cur=0;
+const t=k=>(I18N[lang][k]??I18N.en[k]);
+
+/* gear geometry: data-gear="cx,cy,outer,base,hole,teeth" */
+function gearPath(cx,cy,ro,rb,hole,n){
+  const P=(r,a)=>[(cx+r*Math.cos(a)).toFixed(2),(cy+r*Math.sin(a)).toFixed(2)];
+  const step=2*Math.PI/n, base=step*.36, tip=step*.22; let d='';
+  for(let i=0;i<n;i++){
+    const a=i*step-Math.PI/2;
+    const pts=[P(rb,a-base),P(ro,a-tip),P(ro,a+tip),P(rb,a+base)];
+    d+=(i?'L':'M')+pts.map(p=>p.join(' ')).join('L');
+  }
+  d+='Z';
+  d+=`M${cx+hole} ${cy}A${hole} ${hole} 0 1 0 ${cx-hole} ${cy}A${hole} ${hole} 0 1 0 ${cx+hole} ${cy}Z`;
+  return d;
+}
+$$('[data-gear]').forEach(p=>{const [cx,cy,ro,rb,h,n]=p.dataset.gear.split(',').map(Number);p.setAttribute('d',gearPath(cx,cy,ro,rb,h,n))});
+
+/* wave connecting the approach steps (passes through node centres at 1/6, 1/2, 5/6) */
+(function(){
+  const pts=[]; for(let i=0;i<=120;i++){const x=i/120; pts.push([ (x*1200).toFixed(1), (56+26*Math.cos(2*Math.PI*1.5*x)).toFixed(1)]);}
+  const d='M'+pts.map(p=>p.join(' ')).join('L');
+  $('#stepwave').setAttribute('d',d); $('#stepwave2').setAttribute('d',d);
+})();
+
+/* ================= Activities ================= */
+function renderActivities(){
+  const acts=t('acts'), list=$('#tablist');
+  list.innerHTML=acts.map((a,i)=>`<button class="tab" role="tab" id="tab-${i}" aria-selected="${i===cur}" aria-controls="panel" tabindex="${i===cur?0:-1}" data-i="${i}"><span class="n">${i+1}</span><span><span class="tt">${a.t}</span><span class="ts">${a.s}</span></span></button>`).join('');
+  renderPanel(false);
+  fillSelect();
+}
+function renderPanel(animate=true){
+  const a=t('acts')[cur], p=$('#panel');
+  p.setAttribute('aria-labelledby','tab-'+cur);
+  const key=ART_KEYS[cur], ph=PHOTOS[key];
+  p.innerHTML=`${ph?`<div class="panel-art photo"><img src="${ph.src}" alt="${ph.alt}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>`:`<div class="panel-art">${ART[key]}</div>`}
+   <div class="panel-body"><h3>${a.t}</h3><p class="desc">${a.d}</p>
+   <ul class="checks">${a.l.map(x=>`<li>${CHECK}<span>${x}</span></li>`).join('')}</ul>
+   <div class="actions"><a class="btn btn-primary" href="#contact" data-act="${cur}">${t('act_btn')}</a></div>
+   <p class="fine">${t('act_note')}</p></div>`;
+  const im=p.querySelector('.panel-art.photo img');
+  if(im)im.addEventListener('error',()=>{const w=im.parentElement;w.classList.remove('photo');w.innerHTML=ART[key]},{once:true});
+  if(animate){p.classList.remove('swap');void p.offsetWidth;p.classList.add('swap')}
+}
+$('#tablist').addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b) return; select(+b.dataset.i);
+});
+$('#tablist').addEventListener('keydown',e=>{
+  const n=5; let i=cur;
+  if(['ArrowDown','ArrowRight'].includes(e.key)) i=(cur+(lang==='ar'&&e.key==='ArrowRight'?-1:1)+n)%n;
+  else if(['ArrowUp','ArrowLeft'].includes(e.key)) i=(cur+(lang==='ar'&&e.key==='ArrowLeft'?1:-1)+n)%n;
+  else if(e.key==='Home') i=0; else if(e.key==='End') i=n-1; else return;
+  e.preventDefault(); select(i,true);
+});
+function select(i,focus){
+  cur=i; $$('.tab').forEach((b,k)=>{b.setAttribute('aria-selected',k===i);b.tabIndex=k===i?0:-1});
+  renderPanel(true); if(focus) $('#tab-'+i).focus();
+}
+/* buttons that carry an activity preselect the form */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-act]'); if(!a) return;
+  $('#f-act').value=a.dataset.act;
+});
+
+/* ================= Form (prepares a mail draft) ================= */
+function fillSelect(){
+  const sel=$('#f-act'), v=sel.value||'0';
+  const opts=t('acts').map((a,i)=>`<option value="${i}">${a.t}</option>`);
+  opts.push(`<option value="5">${t('src_k')}</option>`);
+  sel.innerHTML=opts.join(''); sel.value=v;
+}
+$('#form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target; if(!f.reportValidity()) return;
+  const actTxt=$('#f-act').selectedOptions[0].textContent;
+  const body=[`${t('l_name')}: ${f.name.value}`,`${t('l_company')}: ${f.company.value}`,`${t('l_email')}: ${f.email.value}`,`${t('l_act')}: ${actTxt}`,'',f.message.value].join('\n');
+  location.href=`mailto:contact@enviromed-dz.com?subject=${encodeURIComponent(t('form_t'))}&body=${encodeURIComponent(body)}`;
+  $('#confirm').classList.add('show');
+});
+
+/* ================= Language ================= */
+function applyLang(l){
+  lang=l; const root=document.documentElement;
+  root.lang=l; root.dir=l==='ar'?'rtl':'ltr'; document.title=t('title');
+  $$('[data-i18n]').forEach(el=>{
+    const v=t(el.dataset.i18n); if(v==null) return;
+    if(el.hasAttribute('data-lines')) el.innerHTML=v.split('\n').map(x=>`<span class="ln">${x}</span>`).join('');
+    else el.textContent=v;
+  });
+  $$('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
+  $$('.langs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+  renderActivities();
+}
+$$('.langs button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+/* mobile menu */
+const mb=$('.menu-btn'), nav=$('#nav');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('open');mb.setAttribute('aria-expanded','false')}});
+
+const q=new URLSearchParams(location.search).get('lang'); applyLang(['fr','ar'].includes(q)?q:'en');
+</script>
+</body>
+</html>

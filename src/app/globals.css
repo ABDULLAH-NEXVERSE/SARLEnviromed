@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #012a50;
+  --navy-hover: #012b53;
+  --navy-deep: #012c53;
+  --navy-darker: #001931;
+  --teal: #028698;
+  --teal-ink: #026a79;
+  --teal-light: #8fd3dd;
+  --green: #34841b;
+  --green-light: #48a627;
+  --white: #ffffff;
+  --mist: #eef7f8;
+  --mist-2: #d9edf0;
+  --ink: #2a4560;
+  --line: rgba(1, 42, 80, 0.16);
+  --line-light: rgba(255, 255, 255, 0.16);
+  --radius: 8px;
+  --lens: 110px;
+  --maxw: 1200px;
+  --gut: clamp(20px, 4vw, 40px);
+
+  --font-display: var(--font-bricolage), var(--font-figtree), system-ui, sans-serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
+}
+
+html[lang="ar"],
+html:lang(ar) {
+  --font-display: var(--font-readex), var(--font-figtree), system-ui, sans-serif;
+  --font-body: var(--font-readex), var(--font-figtree), system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+html:lang(ar) h1, html:lang(ar) h2, html:lang(ar) h3, html:lang(ar) h4 {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+.ln {
+  display: block;
+}
+
+/* Animations */
+.spin {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+  animation: spin 140s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ln-1 {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .hero-ln-2 {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: rise 0.8s 0.14s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .hero-ln-3 {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: rise 0.8s 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .wave-anim {
+    animation: sweep 1.2s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .leaf-anim {
+    transform-box: fill-box;
+    transform-origin: 0% 100%;
+    animation: grow 0.9s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sweep {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+@keyframes pulseRadar {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmerGlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 3D tilt styles */
+.perspective-container {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(2.5deg) rotateY(-2.5deg) scale(1.01);
+  box-shadow: 0 20px 35px -10px rgba(1, 42, 80, 0.2), 0 0 0 1px rgba(2, 134, 152, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f8f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #028698;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #012a50;
+}
