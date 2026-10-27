@@ -15,7 +15,10 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ t }) => {
   };
 
   return (
-    <footer className="site-footer" style={{ marginTop: 'clamp(32px, 6vw, 64px)' }}>
+    <footer
+      className="site-footer"
+      style={{ backgroundColor: '#012a50', marginTop: 'clamp(32px, 6vw, 64px)' }}
+    >
       {/* Wave top transition from index (3).html */}
       <svg
         className="wave-top"
@@ -23,6 +26,10 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ t }) => {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        <path
+          d="M0 0H1440V8C1260 30 1080 0 800 40C520 80 260 -6 0 40Z"
+          fill="#fff"
+        />
         <path
           d="M0 40 C260 -6 520 80 800 40 C1080 0 1260 30 1440 8 V90 H0Z"
           fill="#028698"
@@ -33,11 +40,12 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ t }) => {
           stroke="#fff"
           strokeWidth="3"
           vectorEffect="non-scaling-stroke"
-          transform="translate(0 8)"
+          transform="translate(0 12)"
         />
         <path
           d="M0 62 C280 22 540 90 820 62 C1100 34 1270 54 1440 40 V90 H0Z"
-          fill="#012c53"
+          fill="#012a50"
+          transform="translate(0 8)"
         />
       </svg>
 

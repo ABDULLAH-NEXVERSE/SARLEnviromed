@@ -65,53 +65,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   return (
     <section ref={sectionRef} className="contact" id="contact">
       <div className="wrap contact-grid">
-        <div>
+        <div className="contact-copy">
+          <div className="kicker">04 / YOUR NEXT PROJECT</div>
           <h2>
             <span className="ln">{headlineLines[0] || 'Tell us what'}</span>
             <span className="ln">{headlineLines[1] || 'you need.'}</span>
           </h2>
           <p className="lede">{t.con_p}</p>
 
-          <ul className="cinfo">
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect
-                  x="2.500"
-                  y="5"
-                  width="19"
-                  height="14"
-                  rx="2"
-                  fill="none"
-                  stroke="#012a50"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M3.500 7l8.500 6.500L20.500 7"
-                  fill="none"
-                  stroke="#028698"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M12 22C6.500 16 4.500 12.500 4.500 9.500a7.500 7.500 0 0 1 15 0c0 3-2 6.500-7.500 12.500Z"
-                  fill="#34841b"
-                />
-                <circle cx="12" cy="9.500" r="2.800" fill="#fff" />
-              </svg>
-              <address style={{ fontStyle: 'normal' }}>
-                Cité des travailleurs, lot 01, N° 07
-                <br />
-                Dar El Beida, Alger
-                <span className="country">{t.country}</span>
-              </address>
-            </li>
-          </ul>
+          <div className="contact-detail">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            <div><small>Email</small><a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a></div>
+          </div>
+          <div className="contact-detail">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <div><small>Address</small>Cité des travailleurs, lot 01, N° 07<br />Dar El Beida, Alger<br /><span className="country">{t.country}</span></div>
+          </div>
         </div>
 
         {/* 3D Scroll-Animated Signature Lens Form */}
@@ -191,8 +166,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               ></textarea>
             </div>
           </div>
-          <p className="help">{t.form_help}</p>
-          <div className="submit">
+          <div className="form-bottom">
+            <small>{t.form_help}</small>
             <button className="btn btn-primary" type="submit">
               {t.form_btn}
             </button>
