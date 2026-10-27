@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Language } from '@/types/content';
 import { I18N } from '@/data/translations';
-import { ScrollProgress } from '@/components/ScrollProgress';
 import { UtilityBar } from '@/components/UtilityBar';
 import { SiteHeader } from '@/components/SiteHeader';
 import { HeroSection } from '@/components/HeroSection';
@@ -19,14 +18,12 @@ export default function HomePage() {
   const [lang, setLang] = useState<Language>('en');
   const [selectedActivityIndex, setSelectedActivityIndex] = useState<number>(0);
 
-  // Sync document language, dir (RTL/LTR), and title
   useEffect(() => {
-    // Check initial query parameter or stored preference
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      const urlLang = params.get('lang');
-      if (urlLang === 'fr' || urlLang === 'ar' || urlLang === 'en') {
-        setLang(urlLang);
+      const q = params.get('lang');
+      if (q === 'fr' || q === 'ar' || q === 'en') {
+        setLang(q);
       }
     }
   }, []);
@@ -57,43 +54,39 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white selection:bg-[#028698]/20 selection:text-[#012a50]">
-      {/* 3D Top Scroll Progress */}
-      <ScrollProgress />
-
-      {/* Utility Top Bar */}
+    <>
+      {/* Utility top bar */}
       <UtilityBar currentLang={lang} onLanguageChange={setLang} t={t} />
 
       {/* Header with authentic logo asset */}
       <SiteHeader t={t} />
 
-      {/* Main Content */}
-      <main id="top" className="flex-1">
-        {/* Hero Section (faithfully preserved exact layout, SVG cog, wave, leaf, 3-color typography, and badges) */}
+      <main id="top">
+        {/* Exact Hero Section from index (3).html (zero distortion, exact SVG cog, wave, leaf, badges) */}
         <HeroSection t={t} />
 
-        {/* Categories Band */}
+        {/* Categories band */}
         <CategoryBand t={t} />
 
-        {/* Enhanced 3D Animated Activities Section */}
+        {/* Enhanced 3D Scroll-Animated Activities Section with authentic signature lens panel */}
         <ActivitiesSection
           t={t}
           onSelectActivityForQuote={handleSelectActivityForQuote}
         />
 
-        {/* Enhanced 3D Local Sourcing Section */}
+        {/* Enhanced 3D Scroll-Animated Local Sourcing with signature lens shape */}
         <SourcingSection
           t={t}
           onSelectLocalSourcing={handleSelectLocalSourcing}
         />
 
-        {/* Enhanced 3D About Section with Interactive Coordination Hub */}
+        {/* Enhanced 3D Scroll-Animated About Section with signature lens Hub diagram and authentic logo symbol */}
         <AboutSection t={t} />
 
-        {/* Enhanced 3D Process Approach Section */}
+        {/* Enhanced 3D Scroll-Animated Approach Section with 3D cogs and wave timeline */}
         <ApproachSection t={t} />
 
-        {/* Enhanced Quotation & Contact Section */}
+        {/* Enhanced 3D Scroll-Animated Contact Section with signature lens form */}
         <ContactSection
           t={t}
           selectedActivityIndex={selectedActivityIndex}
@@ -101,8 +94,8 @@ export default function HomePage() {
         />
       </main>
 
-      {/* Redesigned Ultra-Modern Footer */}
+      {/* Redesigned Modern Enterprise Footer */}
       <ModernFooter t={t} />
-    </div>
+    </>
   );
 }

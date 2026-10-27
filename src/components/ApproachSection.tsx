@@ -1,128 +1,109 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
 import { getGearPath, getTimelineWavePath } from '@/utils/geometry';
-import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface ApproachSectionProps {
   t: ContentTranslation;
 }
 
 export const ApproachSection: React.FC<ApproachSectionProps> = ({ t }) => {
-  // Gear paths for the 3 process nodes: cx=56, cy=56, ro=54, rb=47, hole=41, teeth=18
+  // Gear geometry for step nodes: cx=56, cy=56, ro=54, rb=47, hole=41, teeth=18
   const stepGearPath = getGearPath(56, 56, 54, 47, 41, 18);
-  const waveTimelinePath = getTimelineWavePath(1200, 112, 26, 56);
+  const wavePath = getTimelineWavePath(1200, 112, 26, 56);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const nodeRotation = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const waveDrawProgress = useTransform(scrollYProgress, [0.1, 0.6], [0.3, 1]);
 
   const headlineLines = t.app_h.split('\n');
 
-  const steps = [
-    {
-      num: 1,
-      color: '#012a50',
-      title: t.s1_t,
-      desc: t.s1_p,
-    },
-    {
-      num: 2,
-      color: '#028698',
-      title: t.s2_t,
-      desc: t.s2_p,
-    },
-    {
-      num: 3,
-      color: '#34841b',
-      title: t.s3_t,
-      desc: t.s3_p,
-    },
-  ];
-
   return (
-    <section id="approach" className="py-20 lg:py-28 bg-[#f8fcfd] relative overflow-hidden scroll-mt-24">
+    <section ref={sectionRef} className="approach" id="approach">
       <div className="wrap">
-        {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-12 items-end mb-16 lg:mb-20">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#028698]/10 text-[#026a79] text-xs font-bold uppercase tracking-wider mb-4 border border-[#028698]/20">
-              <Sparkles className="w-3.5 h-3.5 text-[#028698]" />
-              <span>Structured Execution</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#012a50] leading-tight tracking-tight">
-              <span className="ln">{headlineLines[0] || 'A clear project,'}</span>
-              <span className="ln text-[#028698]">{headlineLines[1] || 'at every stage.'}</span>
-            </h2>
-          </div>
-          <p className="text-lg text-[#2a4560] leading-relaxed max-w-[32em]">
-            {t.app_p}
-          </p>
+        <div className="sec-head">
+          <h2>
+            <span className="ln">{headlineLines[0] || 'A clear project,'}</span>
+            <span className="ln">{headlineLines[1] || 'at every stage.'}</span>
+          </h2>
+          <p>{t.app_p}</p>
         </div>
 
-        {/* 3-Step Process Flow with Connecting Sine Wave Timeline */}
-        <div className="relative">
-          {/* Desktop Connecting Wave SVG */}
-          <div className="hidden lg:block absolute inset-x-0 top-0 h-[112px] pointer-events-none z-0">
-            <svg
-              viewBox="0 0 1200 112"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              className="w-full h-full"
-            >
-              <path
-                d={waveTimelinePath}
-                fill="none"
-                stroke="#d9edf0"
-                strokeWidth="5"
-                vectorEffect="non-scaling-stroke"
-                strokeLinecap="round"
-                transform="translate(0, 10)"
-              />
-              <path
-                d={waveTimelinePath}
-                fill="none"
-                stroke="#028698"
-                strokeWidth="4"
-                vectorEffect="non-scaling-stroke"
-                strokeLinecap="round"
-              />
-            </svg>
+        <div className="steps" id="steps">
+          <svg
+            className="wavebg"
+            id="wavebg"
+            viewBox="0 0 1200 112"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <motion.path
+              id="stepwave2"
+              d={wavePath}
+              fill="none"
+              stroke="#d9edf0"
+              strokeWidth="4"
+              vectorEffect="non-scaling-stroke"
+              strokeLinecap="round"
+              transform="translate(0 12)"
+              style={{ pathLength: waveDrawProgress }}
+            />
+            <motion.path
+              id="stepwave"
+              d={wavePath}
+              fill="none"
+              stroke="#028698"
+              strokeWidth="4"
+              vectorEffect="non-scaling-stroke"
+              strokeLinecap="round"
+              style={{ pathLength: waveDrawProgress }}
+            />
+          </svg>
+
+          {/* Step 1 */}
+          <div className="step">
+            <motion.div style={{ rotate: nodeRotation }} className="node">
+              <svg viewBox="0 0 112 112" aria-hidden="true">
+                <circle cx="56" cy="56" r="46" fill="#fff" />
+                <path d={stepGearPath} fill="#012a50" fillRule="evenodd" />
+              </svg>
+              <b>1</b>
+            </motion.div>
+            <h3>{t.s1_t}</h3>
+            <p>{t.s1_p}</p>
           </div>
 
-          {/* Mobile vertical line */}
-          <div className="lg:hidden absolute inset-y-12 inset-inline-start-1/2 -translate-x-1/2 w-[3px] rounded-full bg-gradient-to-b from-[#012a50] via-[#028698] to-[#34841b]" />
+          {/* Step 2 */}
+          <div className="step">
+            <motion.div style={{ rotate: nodeRotation }} className="node">
+              <svg viewBox="0 0 112 112" aria-hidden="true">
+                <circle cx="56" cy="56" r="46" fill="#fff" />
+                <path d={stepGearPath} fill="#028698" fillRule="evenodd" />
+              </svg>
+              <b>2</b>
+            </motion.div>
+            <h3>{t.s2_t}</h3>
+            <p>{t.s2_p}</p>
+          </div>
 
-          {/* Process Step Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 relative z-10">
-            {steps.map((st) => (
-              <div
-                key={st.num}
-                className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-[rgba(1,42,80,0.12)] shadow-sm hover:shadow-xl hover:border-[#028698] transition-all duration-300 text-center flex flex-col items-center card-3d group"
-              >
-                {/* Node with Cog Ring and Step Number */}
-                <div className="relative w-28 h-28 flex items-center justify-center flex-none">
-                  <svg
-                    viewBox="0 0 112 112"
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full drop-shadow-sm transition-transform duration-700 group-hover:rotate-45"
-                  >
-                    <circle cx="56" cy="56" r="46" fill="#fff" />
-                    <path d={stepGearPath} fill={st.color} fillRule="evenodd" />
-                  </svg>
-                  <b
-                    className="relative font-display text-3xl font-extrabold"
-                    style={{ color: st.color }}
-                  >
-                    {st.num}
-                  </b>
-                </div>
-
-                <h3 className="mt-6 text-xl sm:text-2xl font-bold text-[#012a50] tracking-tight">
-                  {st.title}
-                </h3>
-                <p className="mt-3 text-sm sm:text-base text-[#2a4560] leading-relaxed max-w-[22em]">
-                  {st.desc}
-                </p>
-              </div>
-            ))}
+          {/* Step 3 */}
+          <div className="step">
+            <motion.div style={{ rotate: nodeRotation }} className="node">
+              <svg viewBox="0 0 112 112" aria-hidden="true">
+                <circle cx="56" cy="56" r="46" fill="#fff" />
+                <path d={stepGearPath} fill="#34841b" fillRule="evenodd" />
+              </svg>
+              <b>3</b>
+            </motion.div>
+            <h3>{t.s3_t}</h3>
+            <p>{t.s3_p}</p>
           </div>
         </div>
       </div>

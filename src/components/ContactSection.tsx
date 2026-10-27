@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
-import { Mail, MapPin, Send, CheckCircle, Sparkles } from 'lucide-react';
 
 interface ContactSectionProps {
   t: ContentTranslation;
@@ -22,6 +22,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const formTilt = useTransform(scrollYProgress, [0, 0.5, 1], [4, 0, -4]);
 
   const headlineLines = t.con_h.split('\n');
 
@@ -55,128 +63,113 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 bg-white relative overflow-hidden scroll-mt-24">
-      <div className="wrap grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-start">
-        {/* Left Column: Direct Info & Location */}
+    <section ref={sectionRef} className="contact" id="contact">
+      <div className="wrap contact-grid">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#028698]/10 text-[#026a79] text-xs font-bold uppercase tracking-wider mb-4 border border-[#028698]/20">
-            <Sparkles className="w-3.5 h-3.5 text-[#028698]" />
-            <span>Direct Inquiry</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#012a50] leading-tight tracking-tight">
+          <h2>
             <span className="ln">{headlineLines[0] || 'Tell us what'}</span>
-            <span className="ln text-[#028698]">{headlineLines[1] || 'you need.'}</span>
+            <span className="ln">{headlineLines[1] || 'you need.'}</span>
           </h2>
+          <p className="lede">{t.con_p}</p>
 
-          <p className="mt-5 text-base sm:text-lg text-[#2a4560] leading-relaxed">
-            {t.con_p}
-          </p>
-
-          <ul className="mt-8 sm:mt-10 grid gap-5">
-            {/* Direct Email */}
-            <li className="flex items-start gap-4 p-4 rounded-2xl bg-[#eef7f8] border border-[rgba(2,134,152,0.2)] text-[#012a50] transition-colors hover:border-[#028698]">
-              <div className="w-10 h-10 rounded-full bg-white border border-[#012a50]/20 flex items-center justify-center flex-none">
-                <Mail className="w-5 h-5 text-[#028698]" />
-              </div>
-              <div>
-                <span className="block text-xs uppercase tracking-wider font-semibold text-[#026a79]">
-                  Email Us Directly
-                </span>
-                <a
-                  href="mailto:contact@enviromed-dz.com"
-                  className="font-bold text-base sm:text-lg text-[#012a50] hover:text-[#028698] transition-colors"
-                >
-                  contact@enviromed-dz.com
-                </a>
-              </div>
+          <ul className="cinfo">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect
+                  x="2.500"
+                  y="5"
+                  width="19"
+                  height="14"
+                  rx="2"
+                  fill="none"
+                  stroke="#012a50"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M3.500 7l8.500 6.500L20.500 7"
+                  fill="none"
+                  stroke="#028698"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a>
             </li>
-
-            {/* Physical Office Address */}
-            <li className="flex items-start gap-4 p-4 rounded-2xl bg-[#eef7f8] border border-[rgba(2,134,152,0.2)] text-[#012a50] transition-colors hover:border-[#028698]">
-              <div className="w-10 h-10 rounded-full bg-white border border-[#012a50]/20 flex items-center justify-center flex-none">
-                <MapPin className="w-5 h-5 text-[#34841b]" />
-              </div>
-              <div>
-                <span className="block text-xs uppercase tracking-wider font-semibold text-[#34841b]">
-                  Office Location
-                </span>
-                <address className="not-italic font-medium text-sm sm:text-base text-[#012a50] leading-relaxed mt-0.5">
-                  Cité des travailleurs, lot 01, N° 07
-                  <br />
-                  Dar El Beida, Alger
-                  <span className="block font-bold text-[#026a79] tracking-wider mt-1">
-                    {t.country}
-                  </span>
-                </address>
-              </div>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 22C6.500 16 4.500 12.500 4.500 9.500a7.500 7.500 0 0 1 15 0c0 3-2 6.500-7.500 12.500Z"
+                  fill="#34841b"
+                />
+                <circle cx="12" cy="9.500" r="2.800" fill="#fff" />
+              </svg>
+              <address style={{ fontStyle: 'normal' }}>
+                Cité des travailleurs, lot 01, N° 07
+                <br />
+                Dar El Beida, Alger
+                <span className="country">{t.country}</span>
+              </address>
             </li>
           </ul>
         </div>
 
-        {/* Right Column: Modern 3D Quotation Form */}
-        <div className="bg-[#eef7f8] border-2 border-[#012a50] rounded-2xl md:rounded-3xl p-6 sm:p-9 lg:p-11 shadow-xl shadow-[#012a50]/10 card-3d">
-          <h3 className="text-2xl sm:text-3xl font-bold text-[#012a50] tracking-tight mb-6">
-            {t.form_t}
-          </h3>
-
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            {/* Name */}
-            <div>
-              <label htmlFor="f-name" className="block text-xs sm:text-sm font-bold text-[#012a50] mb-1.5">
-                {t.l_name} *
-              </label>
+        {/* 3D Scroll-Animated Signature Lens Form */}
+        <motion.form
+          style={{ rotateX: formTilt, transformPerspective: 1200 }}
+          className="form"
+          id="form"
+          noValidate
+          onSubmit={handleSubmit}
+        >
+          <h3>{t.form_t}</h3>
+          <div className="fields">
+            <div className="field">
+              <label htmlFor="f-name">{t.l_name}</label>
               <input
                 id="f-name"
                 name="name"
+                autoComplete="name"
                 required
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[rgba(1,42,80,0.3)] bg-white text-[#012a50] focus:outline-none focus:ring-2 focus:ring-[#028698] transition-all text-sm sm:text-base"
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             </div>
-
-            {/* Company */}
-            <div>
-              <label htmlFor="f-company" className="block text-xs sm:text-sm font-bold text-[#012a50] mb-1.5">
-                {t.l_company}
-              </label>
+            <div className="field">
+              <label htmlFor="f-company">{t.l_company}</label>
               <input
                 id="f-company"
                 name="company"
+                autoComplete="organization"
                 value={formData.company}
-                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[rgba(1,42,80,0.3)] bg-white text-[#012a50] focus:outline-none focus:ring-2 focus:ring-[#028698] transition-all text-sm sm:text-base"
+                onChange={(e) =>
+                  setFormData({ ...formData, company: e.target.value })
+                }
               />
             </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="f-email" className="block text-xs sm:text-sm font-bold text-[#012a50] mb-1.5">
-                {t.l_email} *
-              </label>
+            <div className="field">
+              <label htmlFor="f-email">{t.l_email}</label>
               <input
                 id="f-email"
                 name="email"
                 type="email"
+                autoComplete="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[rgba(1,42,80,0.3)] bg-white text-[#012a50] focus:outline-none focus:ring-2 focus:ring-[#028698] transition-all text-sm sm:text-base"
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
               />
             </div>
-
-            {/* Activity Select */}
-            <div>
-              <label htmlFor="f-act" className="block text-xs sm:text-sm font-bold text-[#012a50] mb-1.5">
-                {t.l_act}
-              </label>
+            <div className="field">
+              <label htmlFor="f-act">{t.l_act}</label>
               <select
                 id="f-act"
                 name="activity"
                 value={selectedActivityIndex}
                 onChange={(e) => onActivitySelect(Number(e.target.value))}
-                className="w-full px-4 py-3 rounded-xl border border-[rgba(1,42,80,0.3)] bg-white text-[#012a50] focus:outline-none focus:ring-2 focus:ring-[#028698] transition-all text-sm sm:text-base font-medium"
               >
                 {activityOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -185,46 +178,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 ))}
               </select>
             </div>
-
-            {/* Message */}
-            <div className="sm:col-span-2">
-              <label htmlFor="f-msg" className="block text-xs sm:text-sm font-bold text-[#012a50] mb-1.5">
-                {t.l_msg} *
-              </label>
+            <div className="field full">
+              <label htmlFor="f-msg">{t.l_msg}</label>
               <textarea
                 id="f-msg"
                 name="message"
                 required
-                rows={4}
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-[rgba(1,42,80,0.3)] bg-white text-[#012a50] focus:outline-none focus:ring-2 focus:ring-[#028698] transition-all text-sm sm:text-base resize-y"
-              />
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+              ></textarea>
             </div>
-
-            {/* Submit & Help Text */}
-            <div className="sm:col-span-2 pt-2">
-              <p className="text-xs text-[#2a4560] leading-relaxed mb-4">
-                {t.form_help}
-              </p>
-
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#012a50] text-white font-bold text-base shadow-lg hover:bg-[#012b53] hover:shadow-xl hover:scale-102 transition-all duration-200 cursor-pointer w-full sm:w-auto"
-              >
-                <span>{t.form_btn}</span>
-                <Send className="w-4 h-4 text-[#8fd3dd]" />
-              </button>
-
-              {submitted && (
-                <div className="mt-4 p-4 rounded-xl bg-white border-s-4 border-[#34841b] text-sm text-[#012a50] flex items-start gap-3 shadow-sm animate-in fade-in duration-300">
-                  <CheckCircle className="w-5 h-5 text-[#34841b] flex-none mt-0.5" />
-                  <p>{t.form_ok}</p>
-                </div>
-              )}
-            </div>
-          </form>
-        </div>
+          </div>
+          <p className="help">{t.form_help}</p>
+          <div className="submit">
+            <button className="btn btn-primary" type="submit">
+              {t.form_btn}
+            </button>
+          </div>
+          <p className={`confirm ${submitted ? 'show' : ''}`} id="confirm" role="status">
+            {t.form_ok}
+          </p>
+        </motion.form>
       </div>
     </section>
   );
