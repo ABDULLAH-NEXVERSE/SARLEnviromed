@@ -1,22 +1,25 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { Language } from '@/types/content';
 import { I18N } from '@/data/translations';
 import { UtilityBar } from '@/components/UtilityBar';
 import { SiteHeader } from '@/components/SiteHeader';
 import { HeroSection } from '@/components/HeroSection';
-import { CategoryBand } from '@/components/CategoryBand';
+import { SupplyOverview } from '@/components/SupplyOverview';
 import { ActivitiesSection } from '@/components/ActivitiesSection';
 import { SourcingSection } from '@/components/SourcingSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ApproachSection } from '@/components/ApproachSection';
 import { ContactSection } from '@/components/ContactSection';
 import { ModernFooter } from '@/components/ModernFooter';
+import { ScrollProgress } from '@/components/ScrollProgress';
 
 export default function HomePage() {
   const [lang, setLang] = useState<Language>('en');
   const [selectedActivityIndex, setSelectedActivityIndex] = useState<number>(0);
+  const [activeActivity, setActiveActivity] = useState<number>(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -45,7 +48,9 @@ export default function HomePage() {
     }
   };
 
+  // Index of "Local sourcing and procurement" in t.acts.
   const handleSelectLocalSourcing = () => {
+    setActiveActivity(5);
     setSelectedActivityIndex(5);
     const contactElem = document.getElementById('contact');
     if (contactElem) {
@@ -54,7 +59,9 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <ScrollProgress />
+
       {/* Utility top bar */}
       <UtilityBar currentLang={lang} onLanguageChange={setLang} t={t} />
 
@@ -65,12 +72,14 @@ export default function HomePage() {
         {/* Exact Hero Section from index (3).html (zero distortion, exact SVG cog, wave, leaf, badges) */}
         <HeroSection t={t} />
 
-        {/* Categories band */}
-        <CategoryBand t={t} />
+        {/* Supply overview: one card per activity, each opening its detail panel */}
+        <SupplyOverview t={t} onSelectActivity={setActiveActivity} />
 
         {/* Enhanced 3D Scroll-Animated Activities Section with authentic signature lens panel */}
         <ActivitiesSection
           t={t}
+          activeIndex={activeActivity}
+          onActiveChange={setActiveActivity}
           onSelectActivityForQuote={handleSelectActivityForQuote}
         />
 
@@ -96,6 +105,6 @@ export default function HomePage() {
 
       {/* Redesigned Modern Enterprise Footer */}
       <ModernFooter t={t} />
-    </>
+    </MotionConfig>
   );
 }

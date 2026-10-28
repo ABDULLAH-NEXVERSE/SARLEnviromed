@@ -1,8 +1,14 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
+import {
+  VIEWPORT,
+  RevealLines,
+  fadeUp,
+  stagger,
+} from './motion/primitives';
 
 interface ContactSectionProps {
   t: ContentTranslation;
@@ -23,20 +29,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const formTilt = useTransform(scrollYProgress, [0, 0.5, 1], [4, 0, -4]);
 
   const headlineLines = t.con_h.split('\n');
 
-  const activityOptions = [
-    ...t.acts.map((act, i) => ({ value: i, label: act.t })),
-    { value: 5, label: t.src_k },
-  ];
+  // Local sourcing is now one of the activities, so the list maps 1:1 to t.acts.
+  const activityOptions = t.acts.map((act, i) => ({ value: i, label: act.t }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,35 +60,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section ref={sectionRef} className="contact" id="contact">
+    <section className="contact" id="contact">
       <div className="wrap contact-grid">
-        <div className="contact-copy">
-          <div className="kicker">04 / YOUR NEXT PROJECT</div>
-          <h2>
-            <span className="ln">{headlineLines[0] || 'Tell us what'}</span>
-            <span className="ln">{headlineLines[1] || 'you need.'}</span>
-          </h2>
-          <p className="lede">{t.con_p}</p>
+        <motion.div
+          className="contact-copy"
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          variants={stagger(0.1)}
+        >
+          <motion.div className="kicker" variants={fadeUp}>04 / YOUR NEXT PROJECT</motion.div>
+          <RevealLines
+            lines={[headlineLines[0] || 'Tell us what', headlineLines[1] || 'you need.']}
+          />
+          <motion.p className="lede" variants={fadeUp}>{t.con_p}</motion.p>
 
-          <div className="contact-detail">
+          <motion.div className="contact-detail" variants={fadeUp}>
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
               <rect x="3" y="5" width="18" height="14" rx="2" />
               <path d="m3 7 9 6 9-6" />
             </svg>
             <div><small>Email</small><a href="mailto:contact@enviromed-dz.com">contact@enviromed-dz.com</a></div>
-          </div>
-          <div className="contact-detail">
+          </motion.div>
+          <motion.div className="contact-detail" variants={fadeUp}>
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
               <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
               <circle cx="12" cy="10" r="2.5" />
             </svg>
             <div><small>Address</small>Cité des travailleurs, lot 01, N° 07<br />Dar El Beida, Alger<br /><span className="country">{t.country}</span></div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* 3D Scroll-Animated Signature Lens Form */}
         <motion.form
-          style={{ rotateX: formTilt, transformPerspective: 1200 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          variants={fadeUp}
           className="form"
           id="form"
           noValidate

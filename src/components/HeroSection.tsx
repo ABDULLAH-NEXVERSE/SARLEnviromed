@@ -1,18 +1,53 @@
 'use client';
 
 import React from 'react';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
 import { getGearPath } from '@/utils/geometry';
+import { EASE } from './motion/primitives';
 
 interface HeroSectionProps {
   t: ContentTranslation;
 }
+
+// Copy enters after the CSS headline sequence (0–0.3s) has started.
+const copyItem = (delay: number) => ({
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, ease: EASE, delay },
+});
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
   // Exact gear from index (3).html: data-gear="300,300,298,258,228,8"
   const heroGearPath = getGearPath(300, 300, 298, 258, 228, 8);
 
   const headlineLines = t.h1.split('\n');
+
+  const reduceMotion = useReducedMotion();
+
+  // Pointer: a restrained 3D tilt that follows the cursor over the visual.
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const spring = { stiffness: 140, damping: 18, mass: 0.5 };
+  const pointerTiltY = useSpring(useTransform(px, [-0.5, 0.5], [-9, 9]), spring);
+  const pointerTiltX = useSpring(useTransform(py, [-0.5, 0.5], [7, -7]), spring);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (reduceMotion || e.pointerType !== 'mouse') return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const resetPointer = () => {
+    px.set(0);
+    py.set(0);
+  };
 
   return (
     <>
@@ -24,22 +59,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
               <span className="ln">{headlineLines[1] || 'Solutions.'}</span>
               <span className="ln">{headlineLines[2] || 'Your projects.'}</span>
             </h1>
-            <p className="lede">{t.hero_p}</p>
-            <div className="actions">
+            <motion.p className="lede" {...copyItem(0.45)}>
+              {t.hero_p}
+            </motion.p>
+            <motion.div className="actions" {...copyItem(0.58)}>
               <a className="btn btn-primary" href="#contact">
                 {t.hero_b1}
               </a>
               <a className="btn btn-ghost" href="#activities">
                 {t.hero_b2}
               </a>
-            </div>
-            <p className="note">
-              <i aria-hidden="true"></i>
+            </motion.div>
+            <motion.p className="note" {...copyItem(0.72)}>
+              <motion.i
+                aria-hidden="true"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
+                style={{ originX: 0 }}
+              ></motion.i>
               <span>{t.hero_note}</span>
-            </p>
+            </motion.p>
           </div>
 
-          <div className="visual">
+          <motion.div
+            className="visual"
+            onPointerMove={handlePointerMove}
+            onPointerLeave={resetPointer}
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
+            style={{
+              rotateX: pointerTiltX,
+              rotateY: pointerTiltY,
+              transformPerspective: 1400,
+              transformStyle: 'preserve-3d',
+            }}
+          >
             <svg
               viewBox="0 0 620 600"
               role="img"
@@ -232,7 +288,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
               </g>
             </svg>
 
-            <div className="vcard b">
+            <motion.div
+              className="vcard b"
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 1.05 }}
+              style={{ z: 70 }}
+            >
               <span className="dot">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -249,13 +311,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
                 <b>{t.cm1}</b>
                 <small>{t.cm2}</small>
               </span>
-            </div>
-            <div className="vcard a">
+            </motion.div>
+            <motion.div
+              className="vcard a"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 1.2 }}
+              style={{ z: 50 }}
+            >
               <div className="k">{t.vis_k}</div>
               <div className="t">{t.vis_t}</div>
               <div className="c">{t.vis_c}</div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         <svg

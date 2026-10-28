@@ -1,9 +1,16 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
 import { getGearPath } from '@/utils/geometry';
+import {
+  VIEWPORT,
+  Reveal,
+  RevealLines,
+  fadeUp,
+  stagger,
+} from './motion/primitives';
 
 interface AboutSectionProps {
   t: ContentTranslation;
@@ -13,27 +20,29 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   const supplierGearPath = getGearPath(0, 0, 17, 13, 5, 10);
   const headlineLines = t.about_h.split('\n');
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const hubTilt = useTransform(scrollYProgress, [0, 0.5, 1], [6, 0, -6]);
-  const hubY = useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -30]);
 
   return (
-    <section ref={sectionRef} className="about" id="about">
+    <section className="about" id="about">
       <div className="wrap about-grid">
         <div>
-          <h2>
-            <span className="ln">{headlineLines[0] || 'Proximity.'}</span>
-            <span className="ln">{headlineLines[1] || 'Clarity.'}</span>
-            <span className="ln">{headlineLines[2] || 'Coordination.'}</span>
-          </h2>
-          <p className="lede">{t.about_p}</p>
-          <ul className="kps">
-            <li>
+          <RevealLines
+            lines={[
+              headlineLines[0] || 'Proximity.',
+              headlineLines[1] || 'Clarity.',
+              headlineLines[2] || 'Coordination.',
+            ]}
+          />
+          <Reveal delay={0.25}>
+            <p className="lede">{t.about_p}</p>
+          </Reveal>
+          <motion.ul
+            className="kps"
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+            variants={stagger(0.14, 0.2)}
+          >
+            <motion.li variants={fadeUp}>
               <span className="ic">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <circle
@@ -59,8 +68,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                 <h3>{t.kp1_t}</h3>
                 <p>{t.kp1_p}</p>
               </div>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={fadeUp}>
               <span className="ic">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="6" cy="12" r="3" fill="#028698" />
@@ -77,18 +86,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                 <h3>{t.kp2_t}</h3>
                 <p>{t.kp2_p}</p>
               </div>
-            </li>
-          </ul>
+            </motion.li>
+          </motion.ul>
         </div>
 
-        {/* 3D Scroll-Animated Signature Lens Hub */}
+        {/* Signature lens hub */}
         <motion.div
-          style={{
-            rotateX: hubTilt,
-            y: hubY,
-            transformPerspective: 1200,
-          }}
           className="hub"
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          variants={fadeUp}
         >
           <div className="k">{t.hub_k}</div>
           <h3>{t.hub_t}</h3>

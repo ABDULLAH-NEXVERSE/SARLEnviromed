@@ -1,18 +1,29 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
+import {
+  EASE,
+  VIEWPORT,
+  Reveal,
+  RevealLines,
+  fadeUp,
+  stagger,
+} from './motion/primitives';
 import {
   ContainerIllustration,
   ModularIllustration,
   TrailerIllustration,
   FertIllustration,
   WorksIllustration,
+  SourcingIllustration,
 } from './ActivityIllustrations';
 
 interface ActivitiesSectionProps {
   t: ContentTranslation;
+  activeIndex: number;
+  onActiveChange: (index: number) => void;
   onSelectActivityForQuote: (index: number) => void;
 }
 
@@ -40,22 +51,24 @@ const PHOTOS: Record<number, { src: string; alt: string }> = {
 
 export const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({
   t,
+  activeIndex: cur,
+  onActiveChange: setCur,
   onSelectActivityForQuote,
 }) => {
-  const [cur, setCur] = useState(0);
   const [imgError, setImgError] = useState<Record<number, boolean>>({});
 
-  // 3D Parallax & Scroll Animation
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const tiltRotateX = useTransform(scrollYProgress, [0, 0.5, 1], [4, 0, -4]);
-  const panelScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.96, 1, 1, 0.98]);
-
   const currentAct = t.acts[cur] || t.acts[0];
+
+  // On narrow screens the tabs become a horizontal strip; keep the active one in view
+  // when it is selected from elsewhere (e.g. the supply overview cards).
+  const tablistRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const list = tablistRef.current;
+    const tab = list?.querySelector<HTMLElement>(`#tab-${cur}`);
+    if (!list || !tab || list.scrollWidth <= list.clientWidth) return;
+    const left = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
+    list.scrollTo({ left, behavior: 'smooth' });
+  }, [cur]);
 
   const renderIllustration = (index: number) => {
     switch (index) {
@@ -69,6 +82,8 @@ export const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({
         return <FertIllustration />;
       case 4:
         return <WorksIllustration />;
+      case 5:
+        return <SourcingIllustration />;
       default:
         return <ContainerIllustration />;
     }
@@ -78,29 +93,39 @@ export const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({
   const hasPhoto = PHOTOS[cur] && !imgError[cur];
 
   return (
-    <section ref={sectionRef} className="activities" id="activities">
+    <section className="activities" id="activities">
       <div className="wrap">
         <div className="sec-head">
-          <h2>
-            <span className="ln">{lines[0] || 'Practical answers'}</span>
-            <span className="ln">{lines[1] || 'to every requirement.'}</span>
-          </h2>
-          <p>{t.act_p}</p>
+          <RevealLines
+            lines={[lines[0] || 'Practical answers', lines[1] || 'to every requirement.']}
+          />
+          <Reveal delay={0.2}>
+            <p>{t.act_p}</p>
+          </Reveal>
         </div>
 
         <div className="tabs-layout">
           {/* Tab List */}
-          <div
+          <motion.div
+            ref={tablistRef}
             className="tablist"
             role="tablist"
             aria-orientation="vertical"
             id="tablist"
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+            variants={stagger(0.08, 0.1)}
           >
             {t.acts.map((act, i) => {
               const isSelected = i === cur;
               return (
-                <button
+                <motion.button
                   key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 18 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+                  }}
                   className="tab"
                   role="tab"
                   id={`tab-${i}`}
@@ -126,33 +151,41 @@ export const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({
                     setCur(nextIdx);
                   }}
                 >
-                  <span className="n">{i + 1}</span>
+                  {isSelected && (
+                    <motion.span
+                      layoutId="tab-active"
+                      className="tab-active"
+                      aria-hidden="true"
+                      transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+                    />
+                  )}
+                  <span className="n">{String(i + 1).padStart(2, '0')}</span>
                   <span>
                     <span className="tt">{act.t}</span>
                     <span className="ts">{act.s}</span>
                   </span>
-                </button>
+                </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
-          {/* 3D Scroll-Animated Signature Panel with iconic lens corner */}
+          {/* Signature panel with iconic lens corner */}
           <motion.div
-            style={{
-              rotateX: tiltRotateX,
-              scale: panelScale,
-              transformPerspective: 1200,
-            }}
-            className="relative"
+            className="panel-stage"
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+            variants={fadeUp}
           >
             <AnimatePresence mode="wait">
               <motion.article
                 key={cur}
-                initial={{ opacity: 0, y: 12, rotateY: -3 }}
-                animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                exit={{ opacity: 0, y: -12, rotateY: 3 }}
-                transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
-                className="panel swap"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="panel"
                 id="panel"
                 role="tabpanel"
                 aria-live="polite"
@@ -176,18 +209,44 @@ export const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({
 
                 {/* Panel Body */}
                 <div className="panel-body">
+                  <div className="panel-label">{t.lbl_supply}</div>
                   <h3>{currentAct.t}</h3>
                   <p className="desc">{currentAct.d}</p>
-                  <ul className="checks">
-                    {currentAct.l.map((req, idx) => (
-                      <li key={idx}>
-                        {CHECK_SVG}
-                        <span>{req}</span>
-                      </li>
-                    ))}
-                  </ul>
 
-                  <div className="actions">
+                  <div className="panel-specs">
+                    <div>
+                      <div className="panel-label">{t.lbl_options}</div>
+                      <motion.ul
+                        className="checks"
+                        initial="hidden"
+                        animate="visible"
+                        variants={stagger(0.07, 0.15)}
+                      >
+                        {currentAct.l.map((req, idx) => (
+                          <motion.li
+                            key={idx}
+                            variants={{
+                              hidden: { opacity: 0, y: 8 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
+                            }}
+                          >
+                            {CHECK_SVG}
+                            <span>{req}</span>
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </div>
+                    <div>
+                      <div className="panel-label">{t.lbl_scope}</div>
+                      <p className="panel-scope">{currentAct.scope}</p>
+                    </div>
+                  </div>
+
+                  <div className="panel-quote">
+                    <div>
+                      <div className="panel-label">{t.lbl_quote}</div>
+                      <p>{currentAct.quote}</p>
+                    </div>
                     <a
                       className="btn btn-primary"
                       href="#contact"

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { ContentTranslation } from '@/types/content';
 
 interface SiteHeaderProps {
@@ -10,9 +11,13 @@ interface SiteHeaderProps {
 
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ t }) => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 24));
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="wrap">
         <a className="brand" href="#top" aria-label="SARL Enviromed">
           <div className="relative w-[190px] h-[54px]">

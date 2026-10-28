@@ -5,6 +5,13 @@ export interface ActivityItem {
   s: string;
   d: string;
   l: string[];
+  scope: string;
+  quote: string;
+}
+
+export interface SupplyPoint {
+  t: string;
+  p: string;
 }
 
 export interface ContentTranslation {
@@ -25,19 +32,24 @@ export interface ContentTranslation {
   vis_c: string;
   cm1: string;
   cm2: string;
-  cat1: string;
-  cat2: string;
-  cat3: string;
-  cat4: string;
+  sup_k: string;
+  sup_h: string;
+  sup_p: string;
+  sup_more: string;
   act_h: string;
   act_p: string;
   act_btn: string;
   act_note: string;
+  lbl_supply: string;
+  lbl_options: string;
+  lbl_scope: string;
+  lbl_quote: string;
   acts: ActivityItem[];
   src_k: string;
   src_h: string;
   src_p: string;
   src_b: string;
+  src_pts: SupplyPoint[];
   about_h: string;
   about_p: string;
   hub_k: string;

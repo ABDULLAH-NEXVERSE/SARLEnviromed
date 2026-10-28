@@ -19,50 +19,77 @@ export const I18N: Record<Language, ContentTranslation> = {
     vis_c: "Illustrative image · Configuration according to project",
     cm1: "All your requirements. One contact.",
     cm2: "Supply & local coordination",
-    cat1: "Equipment",
-    cat2: "Modular solutions",
-    cat3: "Agricultural supplies",
-    cat4: "Construction",
+    sup_k: "What we supply",
+    sup_h: "Six activities.\nOne local contact.",
+    sup_p: "Choose the activity that matches your requirement to see the options, delivery scope and how to request a quotation.",
+    sup_more: "View details",
     act_h: "Practical answers\nto every requirement.",
-    act_p: "Five complementary activities for your agricultural, industrial and site requirements.",
+    act_p: "Six complementary activities for your agricultural, industrial and site requirements.",
     act_btn: "Let’s discuss your project",
     act_note: "Specifications, availability and terms to be confirmed for your enquiry. Illustrative image.",
+    lbl_supply: "What we supply",
+    lbl_options: "Available options",
+    lbl_scope: "Delivery scope",
+    lbl_quote: "Request a quotation",
     acts: [
       {
         t: "Container supply",
         s: "Sizes and configurations for storage, transport and the requirements of your site.",
         d: "New and used standard, refrigerated and specialist containers sourced according to your requirements.",
-        l: ["Container dimensions and type", "Condition and intended use", "Quantity, documentation and delivery location"]
+        l: ["Container dimensions and type", "Condition and intended use", "Quantity, documentation and delivery location"],
+        scope: "Delivery to the location you specify, with quantities, documentation and timing confirmed for your enquiry.",
+        quote: "Share the container type and dimensions, condition, quantity and delivery location."
       },
       {
-        t: "Modular workspaces",
+        t: "Modular container workspaces",
         s: "Container spaces configured and fitted out around your project.",
         d: "Supply, conversion and installation of individual or interconnected modules within an agreed scope.",
-        l: ["Offices, site facilities and meeting rooms", "Insulation, partitions and agreed fit-out", "Installation, supports and connections according to the project"]
+        l: ["Offices, site facilities and meeting rooms", "Insulation, partitions and agreed fit-out", "Installation, supports and connections according to the project"],
+        scope: "Supply, conversion and installation within an agreed scope, including supports and connections according to the project.",
+        quote: "Share the intended use, number of modules, fit-out required and site location."
       },
       {
-        t: "Tipper trailers",
+        t: "Tipper trailers and equipment",
         s: "Transport solutions for road, agricultural and construction operations.",
         d: "Supply of road tipper semi-trailers and agricultural trailers according to the requested specifications.",
-        l: ["Capacity and payload", "Axles, tyres, brakes and tipping system", "Tractor compatibility and delivery location"]
+        l: ["Capacity and payload", "Axles, tyres, brakes and tipping system", "Tractor compatibility and delivery location"],
+        scope: "Supply to the requested specification, with tractor compatibility and delivery location confirmed for your enquiry.",
+        quote: "Share the capacity, intended use, tractor type and delivery location."
       },
       {
         t: "Chemical fertilisers",
         s: "Formulations, quantities and packaging to meet your request.",
         d: "Fertiliser supply according to the product type, composition and delivery conditions requested.",
-        l: ["Formulation and nutrient content", "Bags, big bags and available packaging", "Technical documentation and safety information"]
+        l: ["Formulation and nutrient content", "Bags, big bags and available packaging", "Technical documentation and safety information"],
+        scope: "Supply in the agreed packaging, with technical documentation and delivery conditions confirmed for your enquiry.",
+        quote: "Share the formulation, quantity, packaging and delivery location."
       },
       {
-        t: "Construction & works",
+        t: "Construction and contracting",
         s: "General construction, civil engineering and works associated with your projects.",
         d: "Coordination of works for agricultural, industrial, commercial and site-development needs.",
-        l: ["Earthworks, foundations and platforms", "Buildings, structural works and finishing", "Utilities and site development within the agreed scope"]
+        l: ["Earthworks, foundations and platforms", "Buildings, structural works and finishing", "Utilities and site development within the agreed scope"],
+        scope: "Works coordinated within the agreed scope, from earthworks and foundations to buildings, utilities and site development.",
+        quote: "Share the type of works, site location, drawings or specifications and preferred timing."
+      },
+      {
+        t: "Local sourcing and procurement",
+        s: "Products and services sourced from suppliers available in Algeria.",
+        d: "We identify suppliers and coordinate enquiries for products and services available in Algeria, according to your specification.",
+        l: ["Supplier identification for your specification", "Technical and commercial information gathered", "Enquiries, documents and follow-up coordinated"],
+        scope: "Coordination from the initial enquiry to the agreed delivery or service arrangements.",
+        quote: "Share the product or service, the specification, quantities and the location concerned."
       }
     ],
-    src_k: "Local sourcing",
-    src_h: "A specific requirement to source locally?",
-    src_p: "We identify suppliers and coordinate enquiries for products and services available in Algeria.",
-    src_b: "Let’s talk",
+    src_k: "How we support your supply",
+    src_h: "Specification, sourcing and coordination in one place.",
+    src_p: "Beyond the products we supply, we bring together the technical and commercial information needed to define your requirement, identify suitable suppliers and follow the order through to delivery.",
+    src_b: "Discuss a sourcing requirement",
+    src_pts: [
+      { t: "Define the specification", p: "Technical requirements, quantities and documentation clarified before any proposal." },
+      { t: "Identify suppliers", p: "Products and services sourced according to your requirement, including suppliers available in Algeria." },
+      { t: "Coordinate delivery", p: "Documents, parties and delivery arrangements followed through to your site." }
+    ],
     about_h: "Proximity.\nClarity.\nCoordination.",
     about_p: "SARL Enviromed supports projects in Algeria through equipment and material supply, modular solutions and construction works. We bring together technical and commercial information to define a response suited to your requirements.",
     hub_k: "Local presence",
@@ -116,50 +143,77 @@ export const I18N: Record<Language, ContentTranslation> = {
     vis_c: "Visuel d’illustration · Configuration selon projet",
     cm1: "Tous vos besoins. Un seul interlocuteur.",
     cm2: "Fourniture & coordination locale",
-    cat1: "Équipements",
-    cat2: "Solutions modulaires",
-    cat3: "Fournitures agricoles",
-    cat4: "Construction",
+    sup_k: "Ce que nous fournissons",
+    sup_h: "Six activités.\nUn seul interlocuteur local.",
+    sup_p: "Choisissez l’activité qui correspond à votre besoin pour consulter les options, le périmètre de livraison et la démarche de demande de devis.",
+    sup_more: "Voir le détail",
     act_h: "Des réponses concrètes\nà chaque besoin.",
-    act_p: "Cinq activités complémentaires pour vos besoins agricoles, industriels et de chantier.",
+    act_p: "Six activités complémentaires pour vos besoins agricoles, industriels et de chantier.",
     act_btn: "Parlons de votre projet",
     act_note: "Spécifications, disponibilité et conditions à confirmer selon votre demande. Visuel d’illustration.",
+    lbl_supply: "Ce que nous fournissons",
+    lbl_options: "Options disponibles",
+    lbl_scope: "Périmètre de livraison",
+    lbl_quote: "Demander un devis",
     acts: [
       {
         t: "Fourniture de conteneurs",
         s: "Des formats et configurations adaptés au stockage, au transport et aux besoins de votre site.",
         d: "Conteneurs neufs ou d’occasion, standards, frigorifiques et spécialisés, recherchés selon votre besoin.",
-        l: ["Dimensions et type de conteneur", "État et usage prévu", "Quantité, documentation et lieu de livraison"]
+        l: ["Dimensions et type de conteneur", "État et usage prévu", "Quantité, documentation et lieu de livraison"],
+        scope: "Livraison au lieu indiqué, avec quantités, documentation et délais confirmés selon votre demande.",
+        quote: "Indiquez le type et les dimensions du conteneur, l’état, la quantité et le lieu de livraison."
       },
       {
-        t: "Espaces de travail modulaires",
+        t: "Espaces de travail modulaires en conteneurs",
         s: "Des espaces en conteneurs, configurés et aménagés autour de votre projet.",
         d: "Fourniture, transformation et installation de modules individuels ou interconnectés selon un périmètre défini.",
-        l: ["Bureaux, installations de chantier et salles de réunion", "Isolation, cloisons et aménagements convenus", "Installation, supports et raccordements selon projet"]
+        l: ["Bureaux, installations de chantier et salles de réunion", "Isolation, cloisons et aménagements convenus", "Installation, supports et raccordements selon projet"],
+        scope: "Fourniture, transformation et installation selon un périmètre défini, supports et raccordements compris selon projet.",
+        quote: "Indiquez l’usage prévu, le nombre de modules, les aménagements souhaités et le lieu d’implantation."
       },
       {
-        t: "Remorques bennes",
+        t: "Remorques bennes et équipements",
         s: "Des solutions de transport pour vos opérations routières, agricoles et de chantier.",
         d: "Fourniture de semi-remorques bennes routières et de remorques agricoles selon les caractéristiques demandées.",
-        l: ["Capacité et charge utile", "Essieux, pneus, freinage et système de bennage", "Compatibilité de traction et lieu de livraison"]
+        l: ["Capacité et charge utile", "Essieux, pneus, freinage et système de bennage", "Compatibilité de traction et lieu de livraison"],
+        scope: "Fourniture selon les caractéristiques demandées, compatibilité de traction et lieu de livraison confirmés selon votre demande.",
+        quote: "Indiquez la capacité, l’usage prévu, le type de tracteur et le lieu de livraison."
       },
       {
         t: "Engrais chimiques",
         s: "Les formulations, quantités et conditionnements qui répondent à votre demande.",
         d: "Fourniture d’engrais selon le type de produit, la composition et les conditions de livraison demandés.",
-        l: ["Formulation et titre en éléments nutritifs", "Sacs, big bags et conditionnements disponibles", "Documentation technique et informations de sécurité"]
+        l: ["Formulation et titre en éléments nutritifs", "Sacs, big bags et conditionnements disponibles", "Documentation technique et informations de sécurité"],
+        scope: "Fourniture dans le conditionnement convenu, avec documentation technique et conditions de livraison confirmées selon votre demande.",
+        quote: "Indiquez la formulation, la quantité, le conditionnement et le lieu de livraison."
       },
       {
-        t: "Construction & travaux",
+        t: "Construction et travaux",
         s: "Construction générale, génie civil et travaux associés à vos projets.",
         d: "Coordination de travaux pour les besoins agricoles, industriels, commerciaux et d’aménagement de sites.",
-        l: ["Terrassement, fondations et plateformes", "Bâtiments, travaux de structure et de finition", "Réseaux et aménagements selon le périmètre convenu"]
+        l: ["Terrassement, fondations et plateformes", "Bâtiments, travaux de structure et de finition", "Réseaux et aménagements selon le périmètre convenu"],
+        scope: "Travaux coordonnés selon le périmètre convenu, du terrassement et des fondations aux bâtiments, réseaux et aménagements.",
+        quote: "Indiquez la nature des travaux, le lieu du site, les plans ou spécifications et les délais souhaités."
+      },
+      {
+        t: "Approvisionnement local et achats",
+        s: "Des produits et prestations recherchés auprès de fournisseurs présents en Algérie.",
+        d: "Nous recherchons les fournisseurs et coordonnons les consultations pour les produits et prestations disponibles en Algérie, selon votre cahier des charges.",
+        l: ["Identification de fournisseurs selon votre spécification", "Informations techniques et commerciales réunies", "Consultations, documents et suivi coordonnés"],
+        scope: "Coordination de la demande initiale jusqu’aux modalités de livraison ou de prestation convenues.",
+        quote: "Indiquez le produit ou la prestation, la spécification, les quantités et le lieu concerné."
       }
     ],
-    src_k: "Approvisionnement local",
-    src_h: "Un besoin spécifique à sourcer localement ?",
-    src_p: "Nous recherchons les fournisseurs et coordonnons les consultations pour les produits et prestations disponibles en Algérie.",
-    src_b: "Échangeons",
+    src_k: "Notre accompagnement",
+    src_h: "Spécification, sourcing et coordination au même endroit.",
+    src_p: "Au-delà des produits fournis, nous réunissons les informations techniques et commerciales nécessaires pour définir votre besoin, identifier les fournisseurs adaptés et suivre la commande jusqu’à la livraison.",
+    src_b: "Parler d’un besoin d’approvisionnement",
+    src_pts: [
+      { t: "Définir la spécification", p: "Exigences techniques, quantités et documentation clarifiées avant toute proposition." },
+      { t: "Identifier les fournisseurs", p: "Produits et prestations recherchés selon votre besoin, y compris auprès de fournisseurs présents en Algérie." },
+      { t: "Coordonner la livraison", p: "Documents, intervenants et modalités de livraison suivis jusqu’à votre site." }
+    ],
     about_h: "La proximité.\nLa clarté.\nLa coordination.",
     about_p: "SARL Enviromed accompagne les projets en Algérie par la fourniture d’équipements et de matériaux, les solutions modulaires et les travaux. Nous réunissons les informations techniques et commerciales pour définir une réponse adaptée à votre besoin.",
     hub_k: "Ancrage local",
@@ -213,50 +267,77 @@ export const I18N: Record<Language, ContentTranslation> = {
     vis_c: "صورة توضيحية · التكوين حسب المشروع",
     cm1: "جميع احتياجاتكم. جهة اتصال واحدة.",
     cm2: "توريد وتنسيق محلي",
-    cat1: "المعدات",
-    cat2: "الحلول المعيارية",
-    cat3: "المستلزمات الزراعية",
-    cat4: "البناء",
+    sup_k: "ما نوفّره",
+    sup_h: "ستة أنشطة.\nجهة اتصال محلية واحدة.",
+    sup_p: "اختاروا النشاط الذي يناسب احتياجكم للاطلاع على الخيارات ونطاق التسليم وطريقة طلب عرض السعر.",
+    sup_more: "عرض التفاصيل",
     act_h: "حلول عملية\nلكل احتياج.",
-    act_p: "خمسة أنشطة متكاملة لاحتياجاتكم الزراعية والصناعية ومواقع الأشغال.",
+    act_p: "ستة أنشطة متكاملة لاحتياجاتكم الزراعية والصناعية ومواقع الأشغال.",
     act_btn: "لنتحدث عن مشروعكم",
     act_note: "تُؤكّد المواصفات والتوفر والشروط وفق طلبكم. الصورة توضيحية.",
+    lbl_supply: "ما نوفّره",
+    lbl_options: "الخيارات المتاحة",
+    lbl_scope: "نطاق التسليم",
+    lbl_quote: "طلب عرض سعر",
     acts: [
       {
         t: "توريد الحاويات",
         s: "مقاسات وتكوينات تناسب التخزين والنقل ومتطلبات موقعكم.",
         d: "توفير حاويات جديدة أو مستعملة، عادية أو مبردة أو متخصصة، وفق احتياجاتكم.",
-        l: ["أبعاد الحاوية ونوعها", "الحالة والاستخدام المقصود", "الكمية والوثائق ومكان التسليم"]
+        l: ["أبعاد الحاوية ونوعها", "الحالة والاستخدام المقصود", "الكمية والوثائق ومكان التسليم"],
+        scope: "التسليم إلى المكان الذي تحددونه، مع تأكيد الكميات والوثائق والمواعيد وفق طلبكم.",
+        quote: "حدّدوا نوع الحاوية وأبعادها وحالتها والكمية ومكان التسليم."
       },
       {
-        t: "مساحات العمل المعيارية",
+        t: "مساحات العمل المعيارية في حاويات",
         s: "مساحات في حاويات، تُصمّم وتُجهّز وفق متطلبات مشروعكم.",
         d: "توريد وتحويل وتركيب وحدات منفردة أو مترابطة ضمن نطاق متفق عليه.",
-        l: ["مكاتب ومرافق مواقع وقاعات اجتماعات", "العزل والقواطع والتجهيزات المتفق عليها", "التركيب والدعامات والتوصيلات حسب المشروع"]
+        l: ["مكاتب ومرافق مواقع وقاعات اجتماعات", "العزل والقواطع والتجهيزات المتفق عليها", "التركيب والدعامات والتوصيلات حسب المشروع"],
+        scope: "التوريد والتحويل والتركيب ضمن نطاق متفق عليه، بما في ذلك الدعامات والتوصيلات حسب المشروع.",
+        quote: "حدّدوا الاستخدام المقصود وعدد الوحدات والتجهيزات المطلوبة وموقع التركيب."
       },
       {
-        t: "المقطورات القلابة",
+        t: "المقطورات القلابة والمعدات",
         s: "حلول نقل للعمليات على الطرق وفي الزراعة ومواقع الأشغال.",
         d: "توريد أنصاف مقطورات قلابة للطرق ومقطورات زراعية وفق المواصفات المطلوبة.",
-        l: ["السعة والحمولة", "المحاور والإطارات والفرامل ونظام القلب", "توافق الجر ومكان التسليم"]
+        l: ["السعة والحمولة", "المحاور والإطارات والفرامل ونظام القلب", "توافق الجر ومكان التسليم"],
+        scope: "التوريد وفق المواصفات المطلوبة، مع تأكيد توافق الجر ومكان التسليم وفق طلبكم.",
+        quote: "حدّدوا السعة والاستخدام المقصود ونوع الجرار ومكان التسليم."
       },
       {
         t: "الأسمدة الكيميائية",
         s: "تركيبات وكميات وأشكال تعبئة تناسب طلبكم.",
         d: "توريد الأسمدة حسب نوع المنتج والتركيبة وشروط التسليم المطلوبة.",
-        l: ["التركيبة ونسبة العناصر الغذائية", "الأكياس والأكياس الكبيرة وأشكال التعبئة المتاحة", "الوثائق التقنية ومعلومات السلامة"]
+        l: ["التركيبة ونسبة العناصر الغذائية", "الأكياس والأكياس الكبيرة وأشكال التعبئة المتاحة", "الوثائق التقنية ومعلومات السلامة"],
+        scope: "التوريد بشكل التعبئة المتفق عليه، مع تأكيد الوثائق التقنية وشروط التسليم وفق طلبكم.",
+        quote: "حدّدوا التركيبة والكمية وشكل التعبئة ومكان التسليم."
       },
       {
-        t: "البناء والأشغال",
+        t: "البناء والمقاولات",
         s: "البناء العام والهندسة المدنية والأشغال المرتبطة بمشاريعكم.",
         d: "تنسيق الأشغال للاحتياجات الزراعية والصناعية والتجارية وتهيئة المواقع.",
-        l: ["الأعمال الترابية والأساسات والمنصات", "المباني والأشغال الإنشائية والتشطيبات", "الشبكات والتهيئة ضمن النطاق المتفق عليه"]
+        l: ["الأعمال الترابية والأساسات والمنصات", "المباني والأشغال الإنشائية والتشطيبات", "الشبكات والتهيئة ضمن النطاق المتفق عليه"],
+        scope: "تنسيق الأشغال ضمن النطاق المتفق عليه، من الأعمال الترابية والأساسات إلى المباني والشبكات والتهيئة.",
+        quote: "حدّدوا نوع الأشغال وموقع المشروع والمخططات أو المواصفات والمواعيد المطلوبة."
+      },
+      {
+        t: "التوريد المحلي والمشتريات",
+        s: "منتجات وخدمات من موردين متوفرين في الجزائر.",
+        d: "نبحث عن الموردين وننسّق الاستفسارات للمنتجات والخدمات المتوفرة في الجزائر وفق دفتر شروطكم.",
+        l: ["تحديد الموردين وفق مواصفاتكم", "جمع المعلومات التقنية والتجارية", "تنسيق الاستفسارات والوثائق والمتابعة"],
+        scope: "تنسيق من الطلب الأولي حتى ترتيبات التسليم أو تقديم الخدمة المتفق عليها.",
+        quote: "حدّدوا المنتج أو الخدمة والمواصفات والكميات والموقع المعني."
       }
     ],
-    src_k: "التوريد المحلي",
-    src_h: "هل لديكم احتياج محدد للتوريد محلياً؟",
-    src_p: "نبحث عن الموردين وننسّق الاستفسارات للمنتجات والخدمات المتوفرة في الجزائر.",
-    src_b: "لنتواصل",
+    src_k: "كيف ندعم توريدكم",
+    src_h: "المواصفات والتوريد والتنسيق في مكان واحد.",
+    src_p: "إلى جانب المنتجات التي نوفّرها، نجمع المعلومات التقنية والتجارية اللازمة لتحديد احتياجكم، والعثور على الموردين المناسبين، ومتابعة الطلب حتى التسليم.",
+    src_b: "لنناقش احتياج التوريد",
+    src_pts: [
+      { t: "تحديد المواصفات", p: "توضيح المتطلبات التقنية والكميات والوثائق قبل تقديم أي عرض." },
+      { t: "تحديد الموردين", p: "البحث عن المنتجات والخدمات وفق احتياجكم، بما في ذلك لدى الموردين المتوفرين في الجزائر." },
+      { t: "تنسيق التسليم", p: "متابعة الوثائق والأطراف وترتيبات التسليم حتى موقعكم." }
+    ],
     about_h: "القرب.\nالوضوح.\nالتنسيق.",
     about_p: "تدعم SARL Enviromed المشاريع في الجزائر من خلال توريد المعدات والمواد والحلول المعيارية والأشغال. نجمع المعلومات التقنية والتجارية لتحديد استجابة تناسب احتياجاتكم.",
     hub_k: "حضور محلي",

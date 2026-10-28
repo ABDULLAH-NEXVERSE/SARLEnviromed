@@ -157,3 +157,32 @@ export const WorksIllustration: React.FC = () => (
     <rect x="284" y="120" width="32" height="12" fill="#34841b" />
   </svg>
 );
+
+export const SourcingIllustration: React.FC = () => (
+  <svg viewBox="0 0 420 300" role="img" aria-label="Suppliers connected to a single specification sheet" className="w-full h-auto max-h-[320px]">
+    <circle cx="210" cy="170" r="132" fill="#fff" />
+    <rect y="250" width="420" height="50" fill="#d9edf0" />
+    <g stroke="#028698" strokeWidth="3" strokeDasharray="7 7" fill="none" strokeLinecap="round">
+      <path d="M146 150C170 150 172 190 166 196" />
+      <path d="M274 150C250 150 248 190 254 196" />
+      <path d="M210 104V160" />
+    </g>
+    <g stroke="#012a50" strokeWidth="4">
+      <path d="M86 140L116 122L146 140V176H86Z" fill="#fff" />
+      <path d="M274 140L304 122L334 140V176H274Z" fill="#fff" />
+      <path d="M180 82L210 64L240 82V112H180Z" fill="#fff" />
+    </g>
+    <g fill="#028698">
+      <rect x="104" y="152" width="24" height="24" />
+      <rect x="292" y="152" width="24" height="24" />
+      <rect x="198" y="92" width="24" height="20" />
+    </g>
+    <rect x="164" y="160" width="92" height="90" rx="4" fill="#fff" stroke="#012a50" strokeWidth="5" />
+    <rect x="164" y="160" width="92" height="14" fill="#012a50" />
+    <g stroke="#012a50" strokeWidth="3" strokeLinecap="round">
+      <path d="M180 192H222M180 210H234M180 228H214" />
+    </g>
+    <circle cx="252" cy="232" r="18" fill="#34841b" />
+    <path d="M244 232l6 6 11-12" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
